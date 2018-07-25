@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    protected $fillable = ['name', 'slug', 'city_id', 'user_id', 'courier_id'];
+    protected $fillable = ['name', 'description', 'slug', 'user_id', 'image', 'ktp', 'is_active'];
+
+    public function isActive()
+    {
+        return $this->is_active == 1;
+    }
 
     //relation
     public function user()
     {
     	return $this->belongsTo('App\User');
-    }
-
-    public function city()
-    {
-        return $this->belongsTo('App\City');
     }
 
     public function products()
@@ -32,5 +32,10 @@ class Store extends Model
     public function orders()
     {
         return $this->hasMany('App\Order');
+    }
+
+    public function address()
+    {
+        return $this->hasOne('App\Address');
     }
 }

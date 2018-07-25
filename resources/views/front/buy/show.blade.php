@@ -24,7 +24,12 @@
 					<td>
 						<strong>Alamat Tujuan</strong><br>
 						{{ $order->user->name }}<br>
-						{{ $order->user->city->name }}
+						{{ $order->user->address->address }}<br>
+						{{ $order->user->address->city->type }}
+						{{ $order->user->address->city->name }}
+						{{ $order->user->address->province->name }}
+						{{ $order->user->address->postal_code }}<br>
+						Telp {{ $order->user->address->phone }}
 					</td>
 					<td class="text-right">
 						<strong>Total Berat Barang</strong><br>

@@ -48,7 +48,15 @@ Route::patch('sales/{order}/accept', 'SalesController@accept')->name('sales.acce
 Route::patch('sales/{order}/send', 'SalesController@send')->name('sales.send');
 Route::patch('sales/{order}/update-resi', 'SalesController@updateResi')->name('sales.update.resi');
 
+//Store
+Route::get('store/create', 'StoreController@create')->name('store.create');
+Route::post('store/store', 'StoreController@store')->name('store.store');
+Route::get('store/yours', 'StoreController@yours')->name('store.yours');
 
 //FOR ADMIN ROLE
 //Dashboard
 Route::get('dashboard', 'PageController@dashboard')->name('dashboard');
+
+//Additional for ajax
+Route::get('additional/province', 'AdditionalController@province')->name('additional.province');
+Route::get('additional/city/{province}', 'AdditionalController@city')->name('additional.city');

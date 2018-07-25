@@ -68,10 +68,15 @@
                     <span class="hidden-xs">{{ Auth::user()->name }}</span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    @if(Auth::user()->isHaveStore())
+                    <li>
+                      <a href="{{ url('store/yours') }}">
+                        <i class="fa fa-shopping-bag"></i>
+                        Toko Saya
+                      </a>
+                    </li>
                     <li class="divider"></li>
+                    @endif
                     <li>
                       <a href="{{ url('profil') }}">
                         <i class="fa fa-user"></i>

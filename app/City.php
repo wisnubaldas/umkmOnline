@@ -19,8 +19,8 @@ class City extends Model
     	return $this->hasMany('App\Store');
     }
 
-    public function users()
+    public function address()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('address');
     }
 }

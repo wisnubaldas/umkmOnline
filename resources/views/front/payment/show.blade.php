@@ -88,9 +88,9 @@
 												<tr>
 													<th colspan="4" class="text-muted">
 														Pembelian dari toko <strong>{{ $order->store->name }}</strong>
-														({{ $order->store->city->name }})
+														({{ $order->store->address->city->name }})
 														<span class="pull-right">
-															<strong>{{ $order->code }}</strong>
+															<strong>{{ $order->getCode() }}</strong>
 														</span>
 														<a href="javascript:void(0)" class="btn-link tbody-toggle">
 															(Detail)
@@ -117,7 +117,12 @@
 													<td>
 														<strong>Alamat Tujuan</strong><br>
 														{{ $order->user->name }}<br>
-														{{ $order->user->city->name }}
+														{{ $order->user->address->address }}<br>
+														{{ $order->user->address->city->type }}
+														{{ $order->user->address->city->name }}
+														{{ $order->user->address->province->name }}
+														{{ $order->user->address->postal_code }}<br>
+														Telp {{ $order->user->address->phone }}
 													</td>
 													<td class="text-right">
 														<strong>Total Berat Barang</strong><br>

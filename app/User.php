@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'city_id'
+        'name', 'email', 'password', 'role_id', 'image'
     ];
 
     /**
@@ -53,15 +53,15 @@ class User extends Authenticatable
         return $qty;
     }
 
+    public function isHaveStore()
+    {
+        return $this->store()->count() > 0;
+    }
+
     //relation
     public function role()
     {
         return $this->belongsTo('App\Role');
-    }
-
-    public function city()
-    {
-        return $this->belongsTo('App\City');
     }
 
     public function store()
@@ -82,5 +82,10 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany('App\Order');
+    }
+
+    public function address()
+    {
+        return $this->hasOne('App\Address');
     }
 }

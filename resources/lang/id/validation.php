@@ -125,7 +125,37 @@ return [
             'image' => 'Bukti Transfer harus berupa gambar/photo',
             'mimes' => 'Bukti Tranfer harus format jpeg/png',
             'max' => 'Bukti Transfer harus kurang dari 200kb'
+        ],
+        'store_name' => [
+            'required' => 'Nama Toko harus diisi',
+            'unique' => 'Nama toko sudah. Silahkan buat nama yang lain',
+        ],
+        'store_description' => [
+            'required' => 'Deskripsi wajib diisi',
+        ],
+        'province_id' => [
+            'required' => 'Provinsi wajib diisi',
+        ],
+        'city_id' => [
+            'required' => 'Kota / Kabupaten wajib diisi',
+        ],
+        'address' => [
+            'required' => 'Alamat wajib diisi',
+        ],
+        'postal_code' => [
+            'required' => 'Kode Pos wajib diisi',
+        ],
+        'phone' => [
+            'required' => 'Telpon wajib diisi',
+            'numeric' => 'Telpon harus numerik, tidak boleh hurup',
+        ],
+        'ktp' => [
+            'required' => 'Anda belum menyisipkan scan KTP',
+            'image' => 'KTP harus berupa gambar/photo',
+            'mimes' => 'KTP harus format jpeg/png',
+            'max' => 'KTP harus kurang dari 200kb',
         ]
+
     ],
 
     /*

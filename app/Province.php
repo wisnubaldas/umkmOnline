@@ -13,4 +13,9 @@ class Province extends Model
     {
     	return $this->hasMany('App\City');
     }
+
+    public function address()
+    {
+    	return $this->hasMany('App\Address');
+    }
 }

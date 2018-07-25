@@ -55,7 +55,12 @@
 										<td>
 											<strong>Alamat Tujuan</strong><br>
 											{{ $cart->user->name }}<br>
-											{{ $cart->user->city->name }}
+											{{ $cart->user->address->address }}<br>
+											{{ $cart->user->address->city->type }}
+											{{ $cart->user->address->city->name }}
+											{{ $cart->user->address->province->name }}
+											{{ $cart->user->address->postal_code }}<br>
+											Telp {{ $cart->user->address->phone }}
 										</td>
 										<td class="text-right">
 											<strong>Total Berat Barang</strong><br>

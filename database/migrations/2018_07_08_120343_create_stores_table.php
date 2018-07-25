@@ -16,12 +16,14 @@ class CreateStoresTable extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->text('description');
             $table->string('slug')->unique();
-            $table->integer('city_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->string('image')->nullable();
+            $table->integer('is_active')->default(0);
+            $table->string('ktp')->nullable();
             $table->timestamps();
 
-            $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

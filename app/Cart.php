@@ -93,7 +93,7 @@ class Cart extends Model
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "origin=".$this->store->city->id."&destination=".$this->user->city->id."&weight=".$this->totalWeight()."&courier=jne",
+            CURLOPT_POSTFIELDS => "origin=".$this->store->address->city->id."&destination=".$this->user->address->city->id."&weight=".$this->totalWeight()."&courier=jne",
             CURLOPT_HTTPHEADER => [
                 "content-type: application/x-www-form-urlencoded",
                 "key: " . env('RAJAONGKIR_KEY') 
