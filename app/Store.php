@@ -13,6 +13,20 @@ class Store extends Model
         return $this->is_active == 1;
     }
 
+    public function nullimage()
+    {
+        return asset('img/store/null-shop-icon.png');
+    }
+
+    public function Sales()
+    {
+        $sales = 0;
+        foreach ($this->orders()->where('status_id', 2)->get() as $order) {
+            $sales += $order->order_details->sum('quantity');
+        }
+        return $sales;
+    }
+
     //relation
     public function user()
     {

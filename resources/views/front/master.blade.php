@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
   @stack('style')
 </head>
-<body class="hold-transition skin-purple layout-top-nav fixed">
+<body class="hold-transition skin-purple layout-top-nav">
   <div class="wrapper">
     <header class="main-header">
       <nav class="navbar navbar-static-top">
@@ -21,28 +21,8 @@
             </button>
           </div>
 
-          @if(Auth::check())
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="{{ \Request::segment(1) == 'payment' || \Request::segment(1) == 'buy' ? 'active' : '' }}">
-                <a href="{{ url('payment') }}">
-                  Pembelian
-                </a>
-              </li>
-              @if(Auth::user()->store()->count() > 0)
-                <li class="{{ \Request::segment(1) == 'sales' ? 'active' : '' }}">
-                  <a href="{{ url('sales?status=1') }}">Penjualan</a>
-                </li>
-              @else
-                <li class="{{ \Request::segment(1) == 'store' ? 'active' : '' }}">
-                  <a href="{{ url('store/create') }}">Buat Toko</a>
-                </li>
-              @endif
-            </ul>
-          </div>
-          @endif
-          <!-- /.navbar-collapse -->
+          <div class="collapse navbar-collapse pull-left" id="navbar-collapse"></div>
+
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -58,40 +38,79 @@
                   </a>
                 </li>
                
-                <!-- User Account Menu -->
-                <li class="dropdown user user-menu">
-                  <!-- Menu Toggle Button -->
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+               {{--user menu--}}
+                <li class="dropdown tasks-menu user user-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                     <!-- The user image in the navbar-->
-                    <img src="{{ asset('img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                    <img 
+                    src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : '' }}" 
+                    class="user-image" alt="User Image">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ Auth::user()->name }}</span>
                   </a>
                   <ul class="dropdown-menu">
-                    @if(Auth::user()->isHaveStore())
                     <li>
-                      <a href="{{ url('store/yours') }}">
-                        <i class="fa fa-shopping-bag"></i>
-                        Toko Saya
-                      </a>
-                    </li>
-                    <li class="divider"></li>
-                    @endif
-                    <li>
-                      <a href="{{ url('profil') }}">
-                        <i class="fa fa-user"></i>
-                        Profil
-                      </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="javascript:void(0)" onclick="return getElementById('formLogout').submit()">
-                        <i class="fa fa-sign-out"></i>
-                        Keluar
-                      </a>
-                      <form id="formLogout" method="post" action="{{ url('logout') }}">
-                        {{ csrf_field() }}
-                      </form>
+                      <!-- inner menu: contains the actual data -->
+                      <ul class="menu">
+
+                        <li>
+                          <a href="{{ url('payment') }}" class="text-purple">
+                            <i class="fa fa-cart-plus"></i>
+                            Pembelian
+                          </a>
+                        </li>
+
+                        @if(Auth::user()->isHaveStore())
+
+                        <li>
+                          <a href="{{ url('sales?status=1') }}" class="text-purple">
+                            <i class="fa fa-cart-arrow-down"></i>
+                            Penjualan
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="{{ url('store/yours') }}" class="text-purple">
+                            <i class="fa fa-building"></i>
+                            Toko Saya
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="{{ url('product') }}" class="text-purple">
+                            <i class="fa fa-shopping-bag"></i>
+                            Produk Saya
+                          </a>
+                        </li>
+
+                        @else
+                        
+                        <li>
+                          <a href="{{ url('store/create') }}" class="text-purple">
+                            <i class="fa fa-plus-circle"></i>
+                            Buat Toko
+                          </a>  
+                        </li>
+                        
+                        @endif
+
+                        <li>
+                          <a href="{{ url('profil') }}" class="text-purple">
+                            <i class="fa fa-user"></i>
+                            Profil
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:void(0)" 
+                          onclick="return getElementById('formLogout').submit()" class="text-purple">
+                            <i class="fa fa-sign-out"></i>
+                            Keluar
+                          </a>
+                          <form id="formLogout" method="post" action="{{ url('logout') }}">
+                            {{ csrf_field() }}
+                          </form>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>

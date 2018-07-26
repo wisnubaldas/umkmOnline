@@ -58,6 +58,12 @@ class User extends Authenticatable
         return $this->store()->count() > 0;
     }
 
+    public function nullphoto()
+    {
+        $firstChar = strtolower($this->name[0]);
+        return asset('img/user/null/'.$firstChar.'.png');
+    }
+
     //relation
     public function role()
     {

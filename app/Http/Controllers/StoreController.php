@@ -63,8 +63,9 @@ class StoreController extends Controller
     }
 
     public function yours()
-    {
-    	$store = Auth::user()->store()->firstOrFail();
-    	return view('front.store.yours', compact('store'));
+    {   
+        $store = Auth::user()->store()->firstOrFail();
+        $products = $store->products;
+    	return view('front.store.yours', compact('store', 'products'));
     }
 }
