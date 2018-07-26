@@ -61,7 +61,7 @@ class User extends Authenticatable
     public function nullphoto()
     {
         $firstChar = strtolower($this->name[0]);
-        return asset('img/user/null/'.$firstChar.'.png');
+        return asset('img/user/null/letter-'.$firstChar.'.png');
     }
 
     //relation
