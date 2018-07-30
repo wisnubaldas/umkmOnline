@@ -77,7 +77,7 @@
                         </li>
 
                         <li>
-                          <a href="{{ url('product') }}" class="text-purple">
+                          <a href="{{ url('product/yours') }}" class="text-purple">
                             <i class="fa fa-shopping-bag"></i>
                             Produk Saya
                           </a>

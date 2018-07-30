@@ -16,6 +16,8 @@ class ProductsTableSeeder extends Seeder
         	[
         		'id' => 1,
         		'name' => 'Sepatu Safety Kings',
+                'slug' => '1-sepatu-safety-kings',
+                'category_id' => 2,
         		'description' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         		'price' => 180000,
                 'weight' => 1500,
@@ -27,6 +29,8 @@ class ProductsTableSeeder extends Seeder
         	[
         		'id' => 2,
         		'name' => 'Tas Selempang Eiger',
+                'slug' => '2-tas-selempang-eiger',
+                'category_id' => 2,
         		'description' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         		'price' => 250000,
         		'store_id' => 1,
@@ -38,6 +42,8 @@ class ProductsTableSeeder extends Seeder
         	[
         		'id' => 3,
         		'name' => 'Lemari Piring',
+                'slug' => '3-lemari-piring',
+                'category_id' => 5,
         		'description' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         		'price' => 285000,
         		'store_id' => 2,
@@ -49,6 +55,8 @@ class ProductsTableSeeder extends Seeder
         	[
         		'id' => 4,
         		'name' => 'Wajan Keramik',
+                'slug' => '4-wajan-keramik',
+                'category_id' => 5,
         		'description' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
         		'price' => 120000,
                 'weight' => 500,

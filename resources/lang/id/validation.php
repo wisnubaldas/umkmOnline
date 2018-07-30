@@ -154,7 +154,34 @@ return [
             'image' => 'KTP harus berupa gambar/photo',
             'mimes' => 'KTP harus format jpeg/png',
             'max' => 'KTP harus kurang dari 200kb',
-        ]
+        ],
+
+        //product_form
+        'product_name' => [
+            'required' => 'Nama Produk harus diisi',
+            'max' => 'Nama Produk tidak boleh lebih dari 200 karakter',
+        ],
+        'category_id' => [
+            'required' => 'Kategori harus diisi'
+        ],
+        'product_weight' => [
+            'required' => 'Berat Produk harus diisi',
+            'numeric' => 'Berat Produk harus berupa angka',
+        ],
+        'product_price' => [
+            'required' => 'Harga Produk harus diisi',
+            'numeric' => 'Harga Produk harus berupa angka',
+        ],
+        'product_image' => [
+            'required' => 'Gambar Produk harus diisi',
+            'image' => 'Gambar Produk harus berupa image / photo',
+            'mimes' => 'Gambar Produk harus format jpg dan png',
+            'max' => 'Gambar Produk tidak boleh lebih dari 200kb'
+        ],
+        'product_desc' => [
+            'required' => 'Deskripsi Produk harus diisi',
+            'min' => 'Deskripsi Produk harus lebih dari 100 karakter',
+        ],
 
     ],
 

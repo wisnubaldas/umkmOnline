@@ -18,7 +18,15 @@ Route::post('logout', 'Auth\LoginController@logout');
 // FOR USER ROLE
 Route::get('/', 'PageController@index')->name('home');
 //product
-Route::get('product/{product}', 'ProductController@show');
+Route::get('product/create', 'ProductController@create')->name('product.create');
+Route::post('product', 'ProductController@store')->name('product.store');
+Route::get('product/yours', 'ProductController@yours')->name('product.yours');
+Route::get('product/{product}', 'ProductController@show')->name('product.show');
+Route::get('product/{product}/edit', 'ProductController@edit')->name('product.edit');
+Route::patch('product/{product}', 'ProductController@update')->name('product.update');
+Route::delete('product/{product}', 'ProductController@destroy')->name('product.destory');
+Route::get('product/{product}/setKosong', 'ProductController@setKosong')->name('product.setkosong');
+Route::get('product/{product}/setTersedia', 'ProductController@setTersedia')->name('product.settersedia');
 //cart
 Route::get('cart', 'CartController@index')->name('cart.index');
 Route::post('cart', 'CartController@store')->name('cart.store');
@@ -36,6 +44,7 @@ Route::post('payment-confirmation', 'PaymentConfirmationController@store')->name
 Route::get('payment-confirmation/{paymentConfirmation}/edit', 'PaymentConfirmationController@edit')->name('payment-confirmation.edit');
 Route::patch('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@update')->name('payment-confirmation.update');
 Route::delete('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@destroy')->name('payment-confirmation.destroy');
+
 //order (pembelian)
 Route::get('buy', 'BuyController@index')->name('buy.index');
 Route::get('buy/completed', 'BuyController@completed')->name('buy.completed');
