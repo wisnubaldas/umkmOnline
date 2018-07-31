@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Store;
 use App\Address;
+use App\City;
+use App\Province;
 use Auth;
+use File;
+use Image;
 
 class StoreController extends Controller
 {
@@ -66,6 +70,89 @@ class StoreController extends Controller
     {   
         $store = Auth::user()->store()->firstOrFail();
         $products = $store->products;
-    	return view('front.store.yours', compact('store', 'products'));
+        $cities = City::all();
+        $provinces = Province::all();
+    	return view('front.store.yours', compact(
+            'store', 'products', 'cities', 'provinces'
+        ));
+    }
+
+    public function update(Request $request, Store $store)
+    {
+        if (!$request->ajax()) {
+            abort(404);
+        }
+        $this->update_store($request, $store);
+        return url('store/yours');
+    }
+
+    private function upload_image($request, $slug)
+    {
+         // upload image
+        $filename = $slug . '.' . $request->store_image->getClientOriginalExtension();
+        $path = public_path('img/store/' . $filename);
+        $image = Image::make($request->store_image->getRealpath());
+        $height = $image->height();
+        $width = $image->width();
+        if ($height < $width) {
+            $image->crop($height, $height)->save($path); 
+        } elseif ($height > $width) {
+            $image->crop($width, $width)->save($path); 
+        } else {
+            $image->save($path);
+        }
+        return $filename;
+    }
+
+    private function update_store($request, $store)
+    {
+        if ($request->get('attr') == 'image') {
+            $request->validate([
+                'store_image' => 'required|image|mimes:jpeg,png|max:200'
+            ]);
+
+            //hapus photo lama
+            if (!$store->isNullImage()) {
+                File::delete(public_path('img/store/'.$store->image));
+            }
+
+            //upload image
+            $filename = $this->upload_image($request, $store->slug);
+
+            //update database
+            $store->image = $filename;
+            $store->save();
+
+        } elseif ($request->get('attr') == 'name') {
+
+            $request->validate([
+                'store_name' => 'required|unique:stores,name,'.$store->id,
+            ]);
+
+            $store->name = $request->store_name;
+            $store->slug = str_slug($request->store_name);
+            $store->save();
+        } elseif ($request->get('attr') == 'desc') {
+            $request->validate([
+                'store_description' => 'required',
+            ]);
+
+            $store->description = $request->store_description;
+            $store->save();
+        } elseif ($request->get('attr') == 'address') {
+            $request->validate([
+                'province_id' => 'required',
+                'city_id' => 'required',
+                'address' => 'required',
+                'postal_code' => 'required',
+                'phone' => 'required|numeric',
+            ]);
+            $store->address->province_id = $request->province_id;
+            $store->address->city_id = $request->city_id;
+            $store->address->address = $request->address;
+            $store->address->postal_code = $request->postal_code;
+            $store->address->phone = $request->phone;
+            $store->address->save();
+        } 
     }
 }

@@ -13,7 +13,7 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-sm-8">
-							<form class="form-horizontal" method="post" action="{{ url('store/store') }}"
+							<form class="form-horizontal" method="post" action="{{ url('store') }}"
 							enctype="multipart/form-data">
 								{{ csrf_field() }}
 								{{--store name--}}
@@ -163,9 +163,6 @@
 				})
 			}
 		});
-
-		
-
 
 		$('body').on('change', '#province' ,function(){
 			var citySelect = $('#city');

@@ -9,7 +9,13 @@
 				<i class="fa fa-shopping-bag"></i>
 				{{ $store->name }}
 			</h3>
-			<p class="text-justify">{{ $store->description }}</p>
+			<p class="text-justify">
+				{{ $store->description }}
+				<button class="btn btn-link btn-xs text-orange editStoreBtn"
+				target-modal="#editDescModal">
+					<i class="fa fa-edit"></i>
+				</button>
+			</p>
 		</div>
 		<div class="tab-pane" id="address" style="min-height: 350px">
 			<address>
@@ -18,6 +24,10 @@
 				{{ $store->address->city->name }}, {{ $store->address->province->name }}
 				{{ $store->address->postal_code }}<br>
 				{{ $store->address->phone }}
+				<button class="btn btn-link btn-xs text-orange editStoreBtn"
+				target-modal="#editAddressModal">
+					<i class="fa fa-edit"></i>
+				</button>
 			</address>
 		</div>
 	</div>

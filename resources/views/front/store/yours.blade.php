@@ -24,8 +24,20 @@
 		<div class="box box-solid">
 			<div class="box-body" style="padding-top: 20px">
 				<img class="profile-user-img img-responsive" 
-				src="{{ is_null($store->image) ? $store->nullimage() : '' }}" alt="{{ $store->name }}">
-				<h3 class="profile-username text-center">{{ $store->name }}</h3>
+				src="{{ is_null($store->image) ? $store->nullimage() : asset('img/store/'.$store->image) }}" 
+				alt="{{ $store->name }}">
+				<button class="btn btn-sm btn-block btn-flat btn-default editStoreBtn"
+				target-modal="#gantiGambarModal">
+					Ganti Gambar
+				</button>
+				
+				<h3 class="profile-username text-center">
+					{{ $store->name }}
+					<button class="btn btn-xs btn-link text-orange editStoreBtn"
+					target-modal="#gantiNamaModal">
+						<i class="fa fa-edit"></i>
+					</button>
+				</h3>
 				<p class="text-muted text-center">{{ $store->address->city->name }}</p>
 				<ul class="list-group list-group-unbordered">
 					<li class="list-group-item">
@@ -61,10 +73,54 @@
 	</div>
 </div>
 
+@include('front.store.change_image_modal')
+@include('front.store.change_store_name_modal')
+@include('front.store.change_description_modal')
+@include('front.store.change_address_modal')
+
 @endsection
 @push('style')
 <style>
 	.nav-tabs li.active { border-top-color: #605ca8 !important }
 	.nav-pills li.active a { border-left: 0 !important; background-color: #eee }
 </style>
+@endpush
+@push('scripts')
+<script>
+	$(function(){
+		$('.editStoreBtn').on('click', function(){
+			var modal = $($(this).attr('target-modal'));
+			var form = modal.find('.editStoreForm');
+			modal.modal('show');
+			form.on('submit', function(e){
+				e.preventDefault();
+				var url = $(this).attr('action');
+				var method = 'POST';
+				var formData = new FormData(this);
+				$.ajax({
+					method: method,
+					url: url,
+					data: formData,
+					cache:false,
+        			contentType: false,
+        			processData: false,
+					error: function(msg){
+						var errors = msg.responseJSON.errors;
+						$.each(errors, function(k, v){
+							$('.'+k).addClass('has-error');
+							$('.'+k+'_error').text(v);
+							setTimeout(function(){
+								$('.'+k).removeClass('has-error');
+								$('.'+k+'_error').text('');
+							}, 2000);
+						});
+					},
+					success: function(data){
+						window.location = data;
+					}
+				});
+			});
+		});
+	});
+</script>
 @endpush

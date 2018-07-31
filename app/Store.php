@@ -13,6 +13,11 @@ class Store extends Model
         return $this->is_active == 1;
     }
 
+    public function isNullImage()
+    {
+        return is_null($this->image);
+    }
+
     public function nullimage()
     {
         return asset('img/store/null-shop-icon.png');

@@ -50,6 +50,7 @@ Route::get('buy', 'BuyController@index')->name('buy.index');
 Route::get('buy/completed', 'BuyController@completed')->name('buy.completed');
 Route::get('buy/{order}', 'BuyController@show')->name('buy.show');
 Route::post('buy/{order}/complete', 'BuyController@completing')->name('buy.completing');
+
 //order (penjualan)
 Route::get('sales', 'SalesController@index')->name('sales.index');
 Route::get('sales/{order}', 'SalesController@show')->name('sales.show');
@@ -59,8 +60,9 @@ Route::patch('sales/{order}/update-resi', 'SalesController@updateResi')->name('s
 
 //Store
 Route::get('store/create', 'StoreController@create')->name('store.create');
-Route::post('store/store', 'StoreController@store')->name('store.store');
+Route::post('store', 'StoreController@store')->name('store.store');
 Route::get('store/yours', 'StoreController@yours')->name('store.yours');
+Route::patch('store/{store}', 'StoreController@update')->name('store.update');
 
 //FOR ADMIN ROLE
 //Dashboard

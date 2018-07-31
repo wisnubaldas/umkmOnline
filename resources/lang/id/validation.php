@@ -156,6 +156,13 @@ return [
             'max' => 'KTP harus kurang dari 200kb',
         ],
 
+        'store_image' => [
+            'required' => 'Gambar/image belum anda sisipkan',
+            'image' => 'Gambar Toko harus berupa gambar/photo',
+            'mimes' => 'Gambar Toko harus format jpeg/png',
+            'max' => 'Gambar Toko harus kurang dari 200kb',
+        ],
+
         //product_form
         'product_name' => [
             'required' => 'Nama Produk harus diisi',
