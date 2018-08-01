@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment_confirmation extends Model
 {
     protected $fillable = [
-    	'payment_id', 'transfer_date', 'admin_bank_name', 'user_bank_name',
+    	'payment_id', 'transfer_date', 'admin_bank_id', 'user_bank_name',
     	'bank_account', 'under_the_name', 'amount', 'image' 
     ];
 
@@ -26,5 +26,10 @@ class Payment_confirmation extends Model
     public function payment()
     {
     	return $this->belongsTo('App\Payment');
+    }
+
+    public function admin_bank()
+    {
+        return $this->belongsTo('App\AdminBank');
     }
 }

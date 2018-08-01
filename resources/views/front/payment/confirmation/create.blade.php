@@ -38,10 +38,10 @@
 								<div class="form-group
 								{{ $errors->has('admin_bank_name') ? 'has-error' : ''}}">
 									<label>Tujuan Bank*</label>
-									<select name="admin_bank_name" class="form-control">
+									<select name="admin_bank_id" class="form-control">
 										<option value="">Pilih Bank</option>
 										@foreach($adminBanks as $bank)
-											<option value="{{ $bank->bank_name }}"
+											<option value="{{ $bank->id }}"
 											{{ old('admin_bank_name') == $bank->bank_name ? 'selected' : ''}}>
 												{{ $bank->bank_name }} ({{ $bank->bank_account }})
 											</option>

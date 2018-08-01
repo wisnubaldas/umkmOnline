@@ -17,6 +17,7 @@ Route::post('logout', 'Auth\LoginController@logout');
 
 // FOR USER ROLE
 Route::get('/', 'PageController@index')->name('home');
+
 //product
 Route::get('product/create', 'ProductController@create')->name('product.create');
 Route::post('product', 'ProductController@store')->name('product.store');
@@ -27,6 +28,7 @@ Route::patch('product/{product}', 'ProductController@update')->name('product.upd
 Route::delete('product/{product}', 'ProductController@destroy')->name('product.destory');
 Route::get('product/{product}/setKosong', 'ProductController@setKosong')->name('product.setkosong');
 Route::get('product/{product}/setTersedia', 'ProductController@setTersedia')->name('product.settersedia');
+
 //cart
 Route::get('cart', 'CartController@index')->name('cart.index');
 Route::post('cart', 'CartController@store')->name('cart.store');
@@ -34,14 +36,18 @@ Route::patch('cart/{cart}/change-jne-service', 'CartController@update')->name('c
 Route::delete('cart/{cart}/destroy', 'CartController@destroy')->name('cart.destroy');
 Route::patch('cart/{cart_detail}/update-quantity', 'CartController@updateCartQuantity')->name('cart.update-quantity');
 Route::delete('cart/{cart_detail}/delete-detail-cart', 'CartController@deleteCartDetail')->name('cart.delete-cart-detail');
+
 //pembayaran (pembelian)
 Route::get('payment', 'PaymentController@index')->name('payment.index');
 Route::post('payment', 'PaymentController@store')->name('payment.store');
 Route::get('payment/{code}', 'PaymentController@show')->name('payment.show');
+Route::get('payment/{payment}/detail', 'PaymentController@detail')->name('payment.detail');
+Route::patch('payment/{payment}/done', 'PaymentController@done')->name('payment.done');
 
 Route::get('payment-confirmation', 'PaymentConfirmationController@create')->name('payment-confirmation.create');
 Route::post('payment-confirmation', 'PaymentConfirmationController@store')->name('payment-confirmation.store');
 Route::get('payment-confirmation/{paymentConfirmation}/edit', 'PaymentConfirmationController@edit')->name('payment-confirmation.edit');
+Route::get('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@show')->name('payment-confirmation.show');
 Route::patch('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@update')->name('payment-confirmation.update');
 Route::delete('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@destroy')->name('payment-confirmation.destroy');
 

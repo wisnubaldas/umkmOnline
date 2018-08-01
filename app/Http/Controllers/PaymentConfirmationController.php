@@ -34,7 +34,7 @@ class PaymentConfirmationController extends Controller
         $payment = Payment::where('code', $request->get('kode'))->firstOrFail();
     	$request->validate([
     		'transfer_date' => 'required',
-    		'admin_bank_name' => 'required',
+    		'admin_bank_id' => 'required',
     		'user_bank_name' => 'required',
     		'bank_account' => 'required|numeric',
     		'under_the_name' => 'required',
@@ -50,7 +50,7 @@ class PaymentConfirmationController extends Controller
     	Payment_confirmation::create([
     		'payment_id' => $payment->id,
     		'transfer_date' => Carbon::createFromFormat('d/m/Y', $request->transfer_date)->toDateString(),
-    		'admin_bank_name' => $request->admin_bank_name,
+    		'admin_bank_id' => $request->admin_bank_id,
     		'user_bank_name' => $request->user_bank_name,
     		'bank_account' => $request->bank_account,
     		'under_the_name' => $request->under_the_name,
@@ -62,6 +62,11 @@ class PaymentConfirmationController extends Controller
     	return redirect()->route('payment.show', ['code' => $payment->code])
     	->with('success', 'Konfirmasi Pembayaran tersimpan. Harap tunggu, kami akan meninjau konfirmasi anda dan akan secepatnya memproses pesanan anda.');
 
+    }
+
+    public function show(Payment_confirmation $paymentConfirmation)
+    {
+        return view('back.payment.confirmation.show', compact('paymentConfirmation'));
     }
 
     public function edit(Payment_confirmation $paymentConfirmation)

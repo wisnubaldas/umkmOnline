@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Http\Request;
 use App\Traits\Gencode;
 use App\Payment;
@@ -21,7 +21,16 @@ class PaymentController extends Controller
     }
 
     public function index()
-    {
+    {   
+        if (Auth::user()->isAdmin() || Auth::user()->isOperator()) {
+            if (request('code')) {
+                $payments = Payment::where('code', 'like', '%'.request('code').'%')->orderBy('is_paid')->paginate(20);
+            } else {
+                $payments = Payment::orderBy('is_paid', 'asc')->paginate(20);
+            }
+            return view('back.payment.index', compact('payments'));
+        }
+
     	$payments = Auth::user()->payments()->where('is_paid', 0)->get();
     	return view('front.payment.index', compact('payments'));
     }
@@ -71,10 +80,21 @@ class PaymentController extends Controller
     {
         $payment = Payment::where('code', $code)->firstOrFail();
         $payment = Payment::findOrFail($payment->id);
-
         $adminBanks = AdminBank::all();
-
         return view('front.payment.show', compact('payment', 'adminBanks'));
+    }
+
+    public function detail(Payment $payment)
+    {
+        return view('back.payment.detail', compact('payment'));
+    }
+
+    public function done(Payment $payment)
+    {
+        $payment->is_paid = 1;
+        $payment->save();
+        return redirect()->route('payment.index')
+        ->with('success', 'Pembayaran '.$payment->getCode().' telah dibayar');
     }
 
     private function destroyCart()

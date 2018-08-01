@@ -17,7 +17,7 @@ class CreatePaymentConfirmationsTable extends Migration
             $table->increments('id');
             $table->integer('payment_id')->unsigned();
             $table->date('transfer_date');
-            $table->string('admin_bank_name');
+            $table->integer('admin_bank_id')->unsigned();
             $table->string('user_bank_name');
             $table->string('bank_account');
             $table->string('under_the_name');
@@ -26,6 +26,7 @@ class CreatePaymentConfirmationsTable extends Migration
             $table->timestamps();
 
             $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+            $table->foreign('admin_bank_id')->references('id')->on('admin_banks');
         });
     }
 

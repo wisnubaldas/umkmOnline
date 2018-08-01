@@ -43,7 +43,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                     <!-- The user image in the navbar-->
                     <img 
-                    src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : '' }}" 
+                    src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image()) }}" 
                     class="user-image" alt="User Image">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ Auth::user()->name }}</span>

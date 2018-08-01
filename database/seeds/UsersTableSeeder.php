@@ -52,8 +52,8 @@ class UsersTableSeeder extends Seeder
         	],
         	[
         		'id' => 5,
-        		'name' => 'Yogi Gilang Ramadhan',
-        		'email' => 'yogigilang182@gmail.com',
+        		'name' => 'Yoga Saprida',
+        		'email' => 'yogasaprida@gmail.com',
         		'password' => bcrypt('rahasia'),
         		'role_id' => 3,
         		'created_at' => now(),
