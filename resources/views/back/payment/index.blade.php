@@ -62,12 +62,12 @@
 												modal-target="#paymentDetailModal">
 													Detail
 												</button>
-												@if($payment->payment_confirmation()->count() > 0 && $payment->is_paid == 0)
+												@if($payment->payment_confirmation()->count() > 0)
 													<button class="btn bg-info btn-xs paymentBtn"
 													url="{{ url('payment-confirmation/'.
 													$payment->payment_confirmation()->first()->id) }}"
 													modal-target="#paymentConfirmationModal">
-														Konfirmasi
+														Bukti
 													</button>
 												@endif
 											</div>

@@ -5,6 +5,7 @@
 		<h4 class="modal-title">Konfirmasi Pembayaran {{ $paymentConfirmation->payment->getCode() }}</h4>
 	</div>
 	<div class="modal-body">
+		@if($paymentConfirmation->payment->is_paid == 0)
 		<div class="callout callout-info">
 			<h4>Info Pembayaran</h4>
 			<p>
@@ -16,6 +17,7 @@
 				atas nama <strong>{{ $paymentConfirmation->admin_bank->under_the_name }}</strong> 
 			</p>
 		</div>
+		@endif
 		<div class="row">
 			<div class="col-sm-8">
 				<div class="form-group">
@@ -52,12 +54,15 @@
 				</div>
 			</div>
 		</div>
+		@if($paymentConfirmation->payment->is_paid == 0)
 		<div class="callout bg-gray">
 			<p>
 				Jika anda yakin pembeli telah melakukan pembayaran sebagai mana konfirmasi pembayaran pembeli diatas, silakan tekan tombol "Pembayaran Selesai", dengan itu, maka pembayaran ini selesai dan pesanan yang terkait didalamnya akan diteruskan ke penjual.
 			</p>
 		</div>
+		@endif
 	</div>
+	@if($paymentConfirmation->payment->is_paid == 0)
 	<div class="modal-footer">
 		<form method="post" action="{{ url('payment/'.$paymentConfirmation->payment->id.'/done') }}">
 			{{ csrf_field() }}
@@ -67,4 +72,5 @@
 			</button>
 		</form>
 	</div>
+	@endif
 </div>
