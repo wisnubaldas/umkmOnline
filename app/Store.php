@@ -13,6 +13,14 @@ class Store extends Model
         return $this->is_active == 1;
     }
 
+    public function status()
+    {
+        if ($this->isActive()) {
+            return 'Aktif';
+        }
+        return 'Tidak Aktif';
+    }
+
     public function isNullImage()
     {
         return is_null($this->image);

@@ -18,6 +18,20 @@ class StoreController extends Controller
     	$this->middleware('auth');
     }
 
+    public function index()
+    {
+        if (Auth::user()->isRegular()) {
+            abort(404);
+        }
+
+        if (request('store_name')) {
+            $stores = Store::where('name', 'like', '%'.request('store_name').'%')->paginate(20);
+        } else {
+            $stores = Store::orderBy('is_active', 'asc')->paginate(20);
+        }
+        return view('back.store.index', compact('stores'));
+    }
+
     public function create()
     {
     	if (Auth::user()->isHaveStore()) {
@@ -66,6 +80,14 @@ class StoreController extends Controller
     	return redirect()->route('store.yours')->with('success', 'Toko sudah dibuat. Tunggu sampai admin mengaktifkan toko anda');
     }
 
+    public function show(Store $store)
+    {
+        if (Auth::user()->isRegular()) {
+            abort(404);
+        }
+        return view('back.store.show', compact('store'));
+    }
+
     public function yours()
     {   
         $store = Auth::user()->store()->firstOrFail();
@@ -84,6 +106,20 @@ class StoreController extends Controller
         }
         $this->update_store($request, $store);
         return url('store/yours');
+    }
+
+    public function activate(Store $store)
+    {
+        $store->is_active = 1;
+        $store->save();
+        return redirect()->route('store.show', ['store' => $store]);
+    }
+
+    public function nonActivate(Store $store)
+    {
+        $store->is_active = 0;
+        $store->save();
+        return redirect()->route('store.show', ['store' => $store]);
     }
 
     private function upload_image($request, $slug)

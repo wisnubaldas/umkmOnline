@@ -65,10 +65,14 @@ Route::patch('sales/{order}/send', 'SalesController@send')->name('sales.send');
 Route::patch('sales/{order}/update-resi', 'SalesController@updateResi')->name('sales.update.resi');
 
 //Store
+Route::get('store', 'StoreController@index')->name('store.index');
+Route::get('store/yours', 'StoreController@yours')->name('store.yours');
 Route::get('store/create', 'StoreController@create')->name('store.create');
 Route::post('store', 'StoreController@store')->name('store.store');
-Route::get('store/yours', 'StoreController@yours')->name('store.yours');
+Route::get('store/{store}', 'StoreController@show')->name('store.show');
 Route::patch('store/{store}', 'StoreController@update')->name('store.update');
+Route::patch('store/{store}/activate', 'StoreController@activate')->name('store.activate');
+Route::patch('store/{store}/nonactivate', 'StoreController@nonActivate')->name('store.nonactivate');
 
 //FOR ADMIN ROLE
 //Dashboard

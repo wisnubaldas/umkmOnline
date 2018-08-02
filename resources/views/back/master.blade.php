@@ -102,6 +102,13 @@
                             <span>Pembayaran</span>
                         </a>
                     </li>
+                    {{--toko--}}
+                    <li class="{{ request()->segment(1) == 'store' ? 'active' : '' }}">
+                        <a href="{{ url('store') }}">
+                            <i class="fa fa-building"></i>
+                            <span>Toko</span>
+                        </a>
+                    </li>
                 </ul>
             <!-- /.sidebar-menu -->
             </section>
