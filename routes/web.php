@@ -41,8 +41,6 @@ Route::delete('cart/{cart_detail}/delete-detail-cart', 'CartController@deleteCar
 Route::get('payment', 'PaymentController@index')->name('payment.index');
 Route::post('payment', 'PaymentController@store')->name('payment.store');
 Route::get('payment/{code}', 'PaymentController@show')->name('payment.show');
-Route::get('payment/{payment}/detail', 'PaymentController@detail')->name('payment.detail');
-Route::patch('payment/{payment}/done', 'PaymentController@done')->name('payment.done');
 
 Route::get('payment-confirmation', 'PaymentConfirmationController@create')->name('payment-confirmation.create');
 Route::post('payment-confirmation', 'PaymentConfirmationController@store')->name('payment-confirmation.store');
@@ -65,18 +63,28 @@ Route::patch('sales/{order}/send', 'SalesController@send')->name('sales.send');
 Route::patch('sales/{order}/update-resi', 'SalesController@updateResi')->name('sales.update.resi');
 
 //Store
-Route::get('store', 'StoreController@index')->name('store.index');
 Route::get('store/yours', 'StoreController@yours')->name('store.yours');
 Route::get('store/create', 'StoreController@create')->name('store.create');
 Route::post('store', 'StoreController@store')->name('store.store');
 Route::get('store/{store}', 'StoreController@show')->name('store.show');
 Route::patch('store/{store}', 'StoreController@update')->name('store.update');
-Route::patch('store/{store}/activate', 'StoreController@activate')->name('store.activate');
-Route::patch('store/{store}/nonactivate', 'StoreController@nonActivate')->name('store.nonactivate');
 
 //FOR ADMIN ROLE
-//Dashboard
-Route::get('dashboard', 'PageController@dashboard')->name('dashboard');
+Route::prefix('admin')->group(function(){
+	//Dashboard
+	Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
+
+	//payment
+	Route::get('payment', 'Admin\PaymentController@index')->name('admin.payment.index');
+	Route::get('payment/{payment}/detail', 'Admin\PaymentController@detail')->name('admin.payment.detail');
+	Route::patch('payment/{payment}/done', 'Admin\PaymentController@done')->name('admin.payment.done');
+
+	//store
+	Route::get('store', 'Admin\StoreController@index')->name('admin.store.index');
+	Route::get('store/{store}', 'Admin\StoreController@show')->name('admin.store.show');
+	Route::patch('store/{store}/activate', 'Admin\StoreController@activate')->name('admin.store.activate');
+	Route::patch('store/{store}/nonactivate', 'Admin\StoreController@nonActivate')->name('admin.store.nonactivate');
+});
 
 //Additional for ajax
 Route::get('additional/province', 'AdditionalController@province')->name('additional.province');

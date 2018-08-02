@@ -8,7 +8,7 @@
 	<div class="col-sm-12">
 		<div class="box box-solid">
 			<div class="box-header with-border">
-				<form method="get" action="{{ url('store') }}">
+				<form method="get" action="{{ url('admin/store') }}">
 					<div class="input-group input-group">
 		                <input type="text" class="form-control" name="store_name" value="{{ request('store_name') }}" 
 		                placeholder="Cari nama toko" required autocomplete="off">
@@ -42,7 +42,7 @@
 											: 'bg-yellow' }}">{{ $store->status() }}</span>
 										</td>
 										<td class="text-center">
-											<a href="{{ url('store/'.$store->id) }}" class="btn btn-xs btn-default">Detail</a>
+											<a href="{{ url('admin/store/'.$store->id) }}" class="btn btn-xs btn-default">Detail</a>
 										</td>
 									</tr>
 								@endforeach

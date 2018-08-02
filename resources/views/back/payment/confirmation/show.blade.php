@@ -64,7 +64,7 @@
 	</div>
 	@if($paymentConfirmation->payment->is_paid == 0)
 	<div class="modal-footer">
-		<form method="post" action="{{ url('payment/'.$paymentConfirmation->payment->id.'/done') }}">
+		<form method="post" action="{{ url('admin/payment/'.$paymentConfirmation->payment->id.'/done') }}">
 			{{ csrf_field() }}
 			{{ method_field('patch') }}
 			<button type="submit" class="btn bg-orange btn-flat">

@@ -64,11 +64,11 @@
 							<button class="btn btn-sm bg-orange" data-toggle="modal" data-target="#ktpModal">KTP Pemilik</button>
 							@if($store->isActive())
 								<button class="btn btn-sm btn-warning activateNonActivateBtn"
-								act="Nontaktifkan" url="{{ url('store/'.$store->id.'/nonactivate') }}">
+								act="Nontaktifkan" url="{{ url('admin/store/'.$store->id.'/nonactivate') }}">
 								Nonaktifkan</button>
 							@else
 								<button class="btn btn-sm bg-purple activateNonActivateBtn"
-								act="Aktifkan" url="{{ url('store/'.$store->id.'/activate') }}">
+								act="Aktifkan" url="{{ url('admin/store/'.$store->id.'/activate') }}">
 								Aktifkan</button>
 							@endif
 						</div>

@@ -17,9 +17,4 @@ class PageController extends Controller
     	$products = Product::all();
     	return view('front.index', compact('products'));
     }
-
-    public function dashboard()
-    {
-    	return view('back.dashboard');
-    }
 }

@@ -15,7 +15,7 @@
 	<div class="col-sm-12">
 		<div class="box box-solid">
 			<div class="box-header with-border">
-				<form method="get" action="{{ url('payment') }}">
+				<form method="get" action="{{ route('admin.payment.index') }}">
 					<div class="input-group input-group">
 		                <input type="text" class="form-control" name="code" value="{{ request('code') }}" 
 		                placeholder="Cari Kode" required autocomplete="off">
@@ -58,7 +58,7 @@
 										<td class="text-center">
 											<div class="btn-group">
 												<button class="btn btn-default btn-xs paymentBtn"
-												url="{{ url('payment/'.$payment->id.'/detail') }}"
+												url="{{ url('admin/payment/'.$payment->id.'/detail') }}"
 												modal-target="#paymentDetailModal">
 													Detail
 												</button>

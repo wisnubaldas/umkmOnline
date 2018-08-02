@@ -89,22 +89,25 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MENU</li>
                     {{--dashboard--}}
-                    <li class="{{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
-                        <a href="{{ url('dashboard') }}">
+                    <li class="{{ request()->segment(1) == 'admin' 
+                    && request()->segment(2) == 'dashboard' ? 'active' : '' }}">
+                        <a href="{{ url('admin/dashboard') }}">
                             <i class="fa fa-dashboard"></i> 
                             <span>Dashboard</span>
                         </a>
                     </li>
                     {{--Pembayaran--}}
-                    <li class="{{ request()->segment(1) == 'payment' ? 'active' : '' }}">
-                        <a href="{{ url('payment') }}">
+                    <li class="{{ request()->segment(1) == 'admin' 
+                    && request()->segment(2) == 'payment' ? 'active' : '' }}">
+                        <a href="{{ url('admin/payment') }}">
                             <i class="fa fa-usd"></i>
                             <span>Pembayaran</span>
                         </a>
                     </li>
                     {{--toko--}}
-                    <li class="{{ request()->segment(1) == 'store' ? 'active' : '' }}">
-                        <a href="{{ url('store') }}">
+                    <li class="{{ request()->segment(1) == 'admin'
+                    && request()->segment(2) == 'store' ? 'active' : '' }}">
+                        <a href="{{ url('admin/store') }}">
                             <i class="fa fa-building"></i>
                             <span>Toko</span>
                         </a>
