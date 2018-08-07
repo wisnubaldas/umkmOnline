@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Store;
 use App\Address;
+use App\StoreBank;
 
 class StoresTableSeeder extends Seeder
 {
@@ -55,6 +56,26 @@ class StoresTableSeeder extends Seeder
                 'province_id' => 9,
                 'postal_code' => '45472'
             ]
+        ]);
+
+        StoreBank::insert([
+            [
+                'store_id' => 1,
+                'bank_name' => 'BRI',
+                'bank_account' => '000122234445',
+                'under_the_name' => 'Adityar Shop',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'store_id' => 2,
+                'bank_name' => 'BCA',
+                'bank_account' => '333345555677778',
+                'under_the_name' => 'Rohaeti Shop',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }

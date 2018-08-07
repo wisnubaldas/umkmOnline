@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['code', 'store_id', 'user_id', 'subtotal', 'ongkir', 'jne_service', 'payment_id'];
+    protected $fillable = ['code', 'store_id', 'user_id', 'subtotal', 'ongkir', 'jne_service', 'payment_id', 'status_id'];
 
     public function getCode()
     {
@@ -17,6 +17,11 @@ class Order extends Model
     public function tanggal()
     {
         return Carbon::parse($this->created_at)->format('d/m/Y');
+    }
+
+    public function tanggalUpdate()
+    {
+        return Carbon::parse($this->update_at)->format('d/m/Y');
     }
 
     public function subtotalStringFormatted()
@@ -73,6 +78,40 @@ class Order extends Model
         return $this->status_id == 4;
     }
 
+    public function isRejected()
+    {
+        return $this->status_id == 5;
+    }
+
+    public function isPaidRefund()
+    {
+        return $this->refund()->count() > 0;
+    }
+
+    public function refundStatus()
+    {
+        if ($this->isPaidRefund()) {
+            return 'Lunas';
+        } else {
+            return "Pending";
+        }
+    }
+
+    public function isPaidAdminPayment()
+    {
+        return $this->admin_payment()->count() > 0;
+    }
+
+    public function adminPaymentStatus()
+    {
+        if ($this->isPaidAdminPayment()) {
+            return 'Lunas';
+        } else {
+            return 'Pending';
+        }
+    }
+
+
     //relation
     public function store()
     {
@@ -97,5 +136,15 @@ class Order extends Model
     public function status()
     {
         return $this->belongsTo('App\Status');
+    }
+
+    public function refund()
+    {
+        return $this->hasOne('App\Refund');
+    }
+
+    public function admin_payment()
+    {
+        return $this->hasOne('App\AdminPayment');
     }
 }

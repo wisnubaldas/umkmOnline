@@ -17,6 +17,27 @@
 						<img 
 						src="{{ $store->isNullImage() ? $store->nullImage() : asset('img/store/'.$store->image) }}" 
 						class="img-responsive img-thumbnail" style="margin-bottom: 10px">
+						<div class="well">
+							<strong>Informasi Bank</strong>
+							<div class="table-responsive">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>Nama Bank</td>
+											<td>{{ $store->bank->bank_name }}</td>
+										</tr>
+										<tr>
+											<td>Rekening Bank</td>
+											<td>{{ $store->bank->bank_account }}</td>
+										</tr>
+										<tr>
+											<td>Atas Nama</td>
+											<td>{{ $store->bank->under_the_name }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="attachment-block">

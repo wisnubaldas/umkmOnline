@@ -18,7 +18,7 @@ class Status extends Model
     		return 'Penjual/Pemilik Toko menyetujui pesanan anda. Dalam hal ini, penjual sedang memproses pesanan anda sampai mengirimnya via JNE';
     	} elseif ($this->id == 3) {
     		return 'Pesanan sedang dikirim. Tunggu beberapa hari sesuai paket JNE yang anda pilih, Pesanan anda akan tiba dirumah anda. Jangan lupa Konfirmasi apabila pesanan barang sudah anda terima.';
-    	} else {
+    	} elseif($this->id == 4) {
     		return 'Transaksi Selesai';
     	}
     }
@@ -31,7 +31,7 @@ class Status extends Model
             return 'Anda telah menyetujui pesanan yang diminta pembeli. Dalam hal ini, Anda sedang memproses pesanan sampai mengirimnya via JNE';
         } elseif ($this->id == 3) {
             return 'Pesanan sedang dikirim. Tunggu beberapa hari sesuai paket JNE yang Pembeli pilih. Apabila pembeli melakukan konfirmasi penerimaan barang, admin akan melakukan transfer uang pesanan ke Toko anda.';
-        } else {
+        } elseif ($this->id == 4) {
             return 'Transaksi Selesai';
         }
     }

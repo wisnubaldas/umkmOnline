@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Store extends Model
 {
@@ -64,5 +65,10 @@ class Store extends Model
     public function address()
     {
         return $this->hasOne('App\Address');
+    }
+
+    public function bank()
+    {
+        return $this->hasOne('App\StoreBank');
     }
 }

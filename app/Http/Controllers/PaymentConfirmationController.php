@@ -81,7 +81,7 @@ class PaymentConfirmationController extends Controller
         $payment = $paymentConfirmation->payment;
         $request->validate([
             'transfer_date' => 'required',
-            'admin_bank_name' => 'required',
+            'admin_bank_id' => 'required',
             'user_bank_name' => 'required',
             'bank_account' => 'required|numeric',
             'under_the_name' => 'required',
@@ -96,7 +96,7 @@ class PaymentConfirmationController extends Controller
         $request->image->move(public_path('img/payment_confirmation'), $filename);
         //update database
         $paymentConfirmation->transfer_date = Carbon::createFromFormat('d/m/Y', $request->transfer_date)->toDateString();
-        $paymentConfirmation->admin_bank_name = $request->admin_bank_name;
+        $paymentConfirmation->admin_bank_id = $request->admin_bank_id;
         $paymentConfirmation->user_bank_name = $request->user_bank_name;
         $paymentConfirmation->bank_account = $request->bank_account;
         $paymentConfirmation->under_the_name = $request->under_the_name;

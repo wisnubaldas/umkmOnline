@@ -15,4 +15,16 @@ class AdminBank extends Model
     {
     	return $this->hasMany('App\Payment_confirmation');
     }
+
+    public function refunds()
+    {
+    	return $this->hasMany('App\Refund');
+    }
+
+    public function admin_payments()
+    {
+        return $this->hasMany('App\AdminPayment');
+    }
 }
+
+

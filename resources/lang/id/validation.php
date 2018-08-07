@@ -103,14 +103,20 @@ return [
         'transfer_date' => [
             'required' => 'Tanggal Transfer harus diisi',
         ],
-        'admin_bank_name' => [
+        'admin_bank_id' => [
             'required' => 'Tujuan Bank harus diisi'
+        ],
+        'store_bank_id' => [
+            'required' => 'Bank Toko harus diisi'
         ],
         'user_bank_name' => [
             'required' => 'Nama Bank Pengirim harus diisi'
         ],
+        'bank_name' => [
+            'required' => 'Nama Bank harus diisi'
+        ],
         'bank_account' => [
-            'required' => 'Rekening Pengirim harus diisi',
+            'required' => 'Rekening Bank harus diisi',
             'numeric' => 'Format Rekening salah'
         ],
         'under_the_name' => [

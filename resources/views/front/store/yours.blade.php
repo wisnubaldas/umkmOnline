@@ -77,6 +77,7 @@
 @include('front.store.change_store_name_modal')
 @include('front.store.change_description_modal')
 @include('front.store.change_address_modal')
+@include('front.store.change_bank_modal')
 
 @endsection
 @push('style')

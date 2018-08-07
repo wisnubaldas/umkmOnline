@@ -37,6 +37,12 @@ class StatusesTableSeeder extends Seeder
         		'created_at' => now(),
         		'updated_at' => now()
         	],
+            [
+                'id' => 5,
+                'name' => 'rejected',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }

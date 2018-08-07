@@ -36,20 +36,20 @@
 								</div>
 
 								<div class="form-group
-								{{ $errors->has('admin_bank_name') ? 'has-error' : ''}}">
+								{{ $errors->has('admin_bank_id') ? 'has-error' : ''}}">
 									<label>Tujuan Bank*</label>
-									<select name="admin_bank_name" class="form-control">
+									<select name="admin_bank_id" class="form-control">
 										<option value="">Pilih Bank</option>
 										@foreach($adminBanks as $bank)
-											<option value="{{ $bank->bank_name }}"
-											{{ $paymentConfirmation->admin_bank_name == $bank->bank_name ? 'selected' : ''}}>
+											<option value="{{ $bank->id }}"
+											{{ $paymentConfirmation->admin_bank_id == $bank->id ? 'selected' : ''}}>
 												{{ $bank->bank_name }} ({{ $bank->bank_account }})
 											</option>
 										@endforeach
 									</select>
-									@if($errors->has('admin_bank_name'))
+									@if($errors->has('admin_bank_id'))
 										<span class="help-block">
-											{{ $errors->first('admin_bank_name') }}
+											{{ $errors->first('admin_bank_id') }}
 										</span>
 									@endif
 								</div>

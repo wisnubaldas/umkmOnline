@@ -109,6 +109,45 @@
 										@endif
 									</div>
 								</div>
+								{{--bank name--}}
+								<div class="form-group {{ $errors->has('bank_name') ? 'has-error' : '' }}">
+									<label class="col-sm-2 control-label">Nama Bank</label>
+									<div class="col-sm-10">
+										<input type="text" name="bank_name" class="form-control" 
+										autocomplete="off">
+										@if($errors->has('bank_name'))
+											<span class="help-block">
+												{{ $errors->first('bank_name') }}
+											</span>
+										@endif
+									</div>
+								</div>
+								{{--bank Account--}}
+								<div class="form-group {{ $errors->has('bank_account') ? 'has-error' : '' }}">
+									<label class="col-sm-2 control-label">Rekening Bank</label>
+									<div class="col-sm-10">
+										<input type="text" name="bank_account" class="form-control" 
+										autocomplete="off">
+										@if($errors->has('bank_account'))
+											<span class="help-block">
+												{{ $errors->first('bank_account') }}
+											</span>
+										@endif
+									</div>
+								</div>
+								{{--bank Account--}}
+								<div class="form-group {{ $errors->has('under_the_name') ? 'has-error' : '' }}">
+									<label class="col-sm-2 control-label">Atas Nama</label>
+									<div class="col-sm-10">
+										<input type="text" name="under_the_name" class="form-control" 
+										autocomplete="off">
+										@if($errors->has('under_the_name'))
+											<span class="help-block">
+												{{ $errors->first('under_the_name') }}
+											</span>
+										@endif
+									</div>
+								</div>
 								{{--ktp--}}
 								<div class="form-group {{ $errors->has('ktp') ? 'has-error' : '' }}">
 									<label class="col-sm-2 control-label">Upload KTP</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Jobs\RejectPendingOrder;
 use App\Payment;
 
 class PaymentController extends Controller
@@ -17,7 +18,7 @@ class PaymentController extends Controller
     {   
         
 		if (request('code')) {
-		    $payments = Payment::where('code', 'like', '%'.request('code').'%')->orderBy('is_paid')->paginate(20);
+		    $payments = Payment::where('code', 'like', '%'.request('code').'%')->orderBy('is_paid', 'asc')->paginate(20);
 		} else {
 		    $payments = Payment::orderBy('is_paid', 'asc')->paginate(20);
 		}
@@ -34,6 +35,12 @@ class PaymentController extends Controller
     {
         $payment->is_paid = 1;
         $payment->save();
+
+        //dispatch delete order if pending in spesific time
+        foreach ($payment->orders as $order) {
+            RejectPendingOrder::dispatch($order)->delay(now()->addMinutes(env('REJORMIN_QUEUE')));
+        }
+
         return redirect()->route('admin.payment.index')
         ->with('success', 'Pembayaran '.$payment->getCode().' telah dibayar');
     }

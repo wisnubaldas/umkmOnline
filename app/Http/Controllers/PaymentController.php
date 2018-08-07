@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Jobs\DeletePendingPayment;
 use Illuminate\Http\Request;
 use App\Traits\Gencode;
 use App\Payment;
@@ -64,6 +65,10 @@ class PaymentController extends Controller
         }
 
     	$this->destroyCart();
+
+        //delete payment if pending more than spesific time
+        DeletePendingPayment::dispatch($payment)->delay(now()->addMinutes(env('DELPAYMIN_QUEUE')));
+
     	return redirect()->route('payment.show', ['code' => $payment->code]);
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Store;
+use App\StoreBank;
 use App\Address;
 use App\City;
 use App\Province;
@@ -36,7 +37,10 @@ class StoreController extends Controller
     		'address' => 'required',
     		'postal_code' => 'required',
     		'phone' => 'required|numeric',
-    		'ktp' => 'required|image|mimes:jpeg,png|max:200'
+            'bank_name' => 'required',
+            'bank_account' => 'required|numeric',
+            'under_the_name' => 'required',
+    		'ktp' => 'required|image|mimes:jpeg,png|max:200',
     	]);
 
     	$slug = str_slug($request->store_name);
@@ -62,6 +66,14 @@ class StoreController extends Controller
     		'province_id' => $request->province_id,
     		'postal_code' => $request->postal_code
     	]);
+
+        //insert store bank
+        StoreBank::create([
+            'store_id' => $store->id,
+            'bank_name' => $request->bank_name,
+            'bank_account' => $request->bank_account,
+            'under_the_name' => $request->under_the_name
+        ]);
 
     	return redirect()->route('store.yours')->with('success', 'Toko sudah dibuat. Tunggu sampai admin mengaktifkan toko anda');
     }
@@ -153,6 +165,16 @@ class StoreController extends Controller
             $store->address->postal_code = $request->postal_code;
             $store->address->phone = $request->phone;
             $store->address->save();
-        } 
+        } elseif ($request->get('attr') == 'bank') {
+            $request->validate([
+                'bank_name' => 'required',
+                'bank_account' => 'required|numeric',
+                'under_the_name' => 'required'
+            ]);
+            $store->bank->bank_name = $request->bank_name;
+            $store->bank->bank_account = $request->bank_account;
+            $store->bank->under_the_name = $request->under_the_name;
+            $store->bank->save();
+        }
     }
 }

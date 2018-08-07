@@ -12,7 +12,7 @@
 	<tbody>
 		@foreach($payments as $payment)
 			@foreach($payment->orders as $order)
-				@if(!$order->isFinished())
+				@if(!$order->isFinished() && !$order->isRejected())
 				<tr>
 					<td>{{ $order->getCode() }}</td>
 					<td>{{ $order->store->name }}</td>

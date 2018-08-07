@@ -16,7 +16,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="{{ url('dashboard') }}" class="logo">
+            <a href="{{ url('admin/dashboard') }}" class="logo">
                 <span class="logo-lg">{{ config('app.name') }}</span>
             </a>
 
@@ -96,20 +96,75 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    {{--Pembayaran--}}
-                    <li class="{{ request()->segment(1) == 'admin' 
-                    && request()->segment(2) == 'payment' ? 'active' : '' }}">
-                        <a href="{{ url('admin/payment') }}">
-                            <i class="fa fa-usd"></i>
-                            <span>Pembayaran</span>
+                    <li class="treeview active menu-open">
+                        <a href="#">
+                            <i class="fa fa-dollar"></i> <span>Pembayaran</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                        <ul class="treeview-menu">
+                            {{-- Pembayaran Masuk--}}
+                            <li class="{{ request()->segment(1) == 'admin' 
+                            && request()->segment(2) == 'payment' ? 'active' : '' }}">
+                                <a href="{{ url('admin/payment') }}">
+                                    <i class="fa fa-arrow-circle-o-left"></i>
+                                    <span>Pembayaran Masuk</span>
+                                    @if($nPendingPayment > 0)
+                                    <span class="pull-right-container">
+                                      <span class="label label-warning pull-right">
+                                          {{ $nPendingPayment }}
+                                      </span>
+                                    </span>
+                                    @endif
+                                </a>
+                            </li>
+                            {{--Pemabayaran Keluar--}}
+                            <li class="{{ request()->segment(1) == 'admin' 
+                            && request()->segment(2) == 'admin-payment' ? 'active' : '' }}">
+                                <a href="{{ url('admin/admin-payment') }}">
+                                    <i class="fa fa-arrow-circle-o-right"></i>
+                                    <span>Pembayaran Keluar</span>
+                                    @if($nPendingAdminPayment > 0)
+                                    <span class="pull-right-container">
+                                      <span class="label label-warning pull-right">
+                                          {{ $nPendingAdminPayment }}
+                                      </span>
+                                    </span>
+                                    @endif
+                                </a>
+                            </li>
+                            {{-- Pengembalian --}}
+                            <li class="{{ request()->segment(1) == 'admin'
+                            && request()->segment(2) == 'refund' ? 'active' : '' }}">
+                                <a href="{{ url('admin/refund') }}">
+                                    <i class="fa fa-undo"></i>
+                                    <span>Pengembalian Dana</span>
+                                    @if($nPendingRefund > 0)
+                                        <span class="pull-right-container">
+                                            <span class="label label-warning pull-right">
+                                                {{ $nPendingRefund }}
+                                            </span>
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+                    
                     {{--toko--}}
                     <li class="{{ request()->segment(1) == 'admin'
                     && request()->segment(2) == 'store' ? 'active' : '' }}">
                         <a href="{{ url('admin/store') }}">
                             <i class="fa fa-building"></i>
                             <span>Toko</span>
+                            @if($nNotActiveStore > 0)
+                            <span class="pull-right-container">
+                              <span class="label label-warning pull-right">
+                                  {{ $nNotActiveStore }}
+                              </span>
+                            </span>
+                            @endif
                         </a>
                     </li>
                 </ul>

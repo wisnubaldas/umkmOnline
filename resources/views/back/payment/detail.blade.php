@@ -5,6 +5,7 @@
 		<h4 class="modal-title">Pembayaran {{ $payment->getCode() }}</h4>
 	</div>
 	<div class="modal-body">
+		@if($payment->orders->count() > 0)
 		@foreach($payment->orders as $order)
 		<div class="table-responsive">
 			<table class="table table-bordered">
@@ -15,10 +16,14 @@
 							({{ $order->store->address->city->name }})
 							<span class="pull-right">
 								<strong>{{ $order->getCode() }}</strong>
+								@if($order->isRejected())
+								<span class="label bg-red">{{ $order->status->name }}</span>
+								@endif
 							</span>
 						</th>
 					</tr>
 				</thead>
+				@if(!$order->isRejected())
 				<tbody>
 					@foreach($order->order_details as $item)
 						<tr>
@@ -60,6 +65,7 @@
 						</td>
 					</tr>
 				</tbody>
+				@endif
 				<thead>
 					<tr>
 						<th colspan="4" class="text-muted">
@@ -73,5 +79,8 @@
 			</table>
 		</div>
 		@endforeach
+		@else
+			<p>Tidak ada pesanan / pesanan dibatalkan</p>
+		@endif
 	</div>
 </div>

@@ -52,11 +52,25 @@
                     <li>
                       <!-- inner menu: contains the actual data -->
                       <ul class="menu">
-
+                        @if(Auth::user()->isAdmin() || Auth::user()->isOperator())
+                          <li>
+                            <a href="{{ url('admin/dashboard') }}" class="text-purple">
+                              <i class="fa fa-dashboard"></i>
+                              Admin Dashboard
+                            </a>
+                          </li>
+                        @endif
                         <li>
                           <a href="{{ url('payment') }}" class="text-purple">
                             <i class="fa fa-cart-plus"></i>
                             Pembelian
+                          </a>
+                        </li>
+
+                        <li>
+                          <a href="{{ url('refund') }}" class="text-purple">
+                            <i class="fa fa-undo"></i>
+                            Pengembalian Dana
                           </a>
                         </li>
 
@@ -66,6 +80,13 @@
                           <a href="{{ url('sales?status=1') }}" class="text-purple">
                             <i class="fa fa-cart-arrow-down"></i>
                             Penjualan
+                          </a>
+                        </li>
+
+                         <li>
+                          <a href="{{ url('admin-payment') }}" class="text-purple">
+                            <i class="fa fa-dollar"></i>
+                            Pendapatan Toko
                           </a>
                         </li>
 

@@ -1,7 +1,7 @@
 @extends('back.master')
-@section('title', 'Pembayaran')
+@section('title', 'Pembayaran Masuk')
 @section('breadcrumb')
-<li class="active">Pembayaran</li>
+<li class="active">Pembayaran Masuk</li>
 @endsection
 @section('content')
 @if(session('success'))
@@ -11,6 +11,11 @@
 		{{ session('success') }}
 	</div>
 @endif
+<div class="callout callout-info">
+	<h4><i class="icon fa fa-info"></i> Info!</h4>
+	Pembayaran Masuk adalah pembayaran yang dilakukan pembeli ke administrator ( rekening bank milik admin ).
+	Tugas anda sebagai admin/operator adalah memverifikasi pembayaran yang dilakukan pembeli dengan cara melihat bukti pembayaran pembeli. Pembayaran yang <strong>pending</strong> selama waktu maksimum (yang ditentukan admin), akan <strong>terhapus</strong> secara <strong>otomatis</strong>.
+</div>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="box box-solid">
