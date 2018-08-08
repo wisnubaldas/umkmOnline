@@ -41,14 +41,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                  <!-- inner menu: contains the actual data -->
                                   <ul class="menu">
-                                    <li>
-                                      <a href="{{ url('profil') }}" class="text-purple">
-                                        <i class="fa fa-user"></i>
-                                        Profil
-                                      </a>
-                                    </li>
                                     <li>
                                       <a href="javascript:void(0)" 
                                       onclick="return getElementById('formLogout').submit()" class="text-purple">

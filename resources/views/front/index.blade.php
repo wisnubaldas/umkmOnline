@@ -2,6 +2,17 @@
 @section('title', 'Beranda')
 @section('page-description', 'Daftar Produk')
 @section('content')
+	@if(Auth::check())
+		@if(!Auth::user()->isHaveAddress())
+		<div class="callout callout-warning">
+			<p>
+				Sebelum berbelanja silahkan lengkapi dulu profil anda.
+				<a href="{{ url('profile') }}" class="button btn-link btn-sm">Lengkapi Profil Saya</a> 
+			</p>
+			
+		</div>
+		@endif
+	@endif
 	<div class="row">
 		@if($products->count() > 0)
 			@foreach($products as $product)

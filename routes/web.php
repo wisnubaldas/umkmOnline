@@ -15,6 +15,16 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 // FOR USER ROLE
 Route::get('/', 'PageController@index')->name('home');
 
@@ -76,6 +86,13 @@ Route::get('store/create', 'StoreController@create')->name('store.create');
 Route::post('store', 'StoreController@store')->name('store.store');
 Route::get('store/{store}', 'StoreController@show')->name('store.show');
 Route::patch('store/{store}', 'StoreController@update')->name('store.update');
+
+//profile
+Route::get('profile', 'ProfileController@index')->name('profile.index');
+Route::patch('profile', 'ProfileController@update')->name('profile.update');
+Route::get('change-password', 'ProfileController@editPassword')->name('profile.change-password');
+Route::patch('change-password', 'ProfileController@updatePassword')->name('profile.update-password');
+Route::patch('profile/change-photo', 'ProfileController@changePhoto')->name('profile.change-photo');
 
 //FOR ADMIN ROLE
 Route::prefix('admin')->group(function(){

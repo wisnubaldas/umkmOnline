@@ -43,7 +43,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                     <!-- The user image in the navbar-->
                     <img 
-                    src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image()) }}" 
+                    src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image) }}" 
                     class="user-image" alt="User Image">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
                     <span class="hidden-xs">{{ Auth::user()->name }}</span>
@@ -116,7 +116,7 @@
                         @endif
 
                         <li>
-                          <a href="{{ url('profil') }}" class="text-purple">
+                          <a href="{{ url('profile') }}" class="text-purple">
                             <i class="fa fa-user"></i>
                             Profil
                           </a>
@@ -142,6 +142,13 @@
                   <a href="{{ url('login') }}">
                     <i class="fa fa-sign-in"></i>
                     Masuk
+                  </a>
+                </li>
+
+                <li>
+                  <a href="{{ url('register') }}">
+                    <i class="fa fa-user-plus"></i>
+                    Daftar Baru
                   </a>
                 </li>
 

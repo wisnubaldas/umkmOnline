@@ -1,10 +1,10 @@
 @extends('auth.master')
-@section('title', 'Login')
+@section('title', 'Atur Ulang Kata Sandi')
 @section('content')
-<p class="login-box-msg">Silahkan masukkan email dan password</p>
-
-<form action="{{ url('login') }}" method="post">
+<p class="login-box-msg">Atur Ulang Kata Sandi</p>
+<form action="{{ url('password/reset') }}" method="post">
   {{ csrf_field() }}
+  <input type="hidden" name="token" value="{{ $token }}">
   <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
     <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" autocomplete="off">
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -23,15 +23,21 @@
       </span>
     @endif
   </div>
+  <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : ''}}">
+    <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password">
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    @if($errors->has('password_confirmation'))
+      <span class="help-block">
+        {{ $errors->first('password_confirmation') }}
+      </span>
+    @endif
+  </div>
   <div class="row">
     <!-- /.col -->
     <div class="col-xs-12">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+      <button type="submit" class="btn btn-primary btn-block btn-flat">Atur Ulang</button>
     </div>
     <!-- /.col -->
   </div>
 </form>
-<br>
-<a href="{{ url('password/reset') }}">Lupa Password?</a><br>
-<a href="{{ url('register') }}" class="text-center">Registrasi Pengguna Baru</a>
 @endsection

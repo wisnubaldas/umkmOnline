@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\ResetPassword;
 use App\Cart;
 
 class User extends Authenticatable
@@ -58,6 +59,11 @@ class User extends Authenticatable
         return $this->store()->count() > 0;
     }
 
+    public function isHaveAddress()
+    {
+        return $this->address()->count() > 0;
+    }
+
     public function nullphoto()
     {
         $firstChar = strtolower($this->name[0]);
@@ -93,5 +99,10 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasOne('App\Address');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }
