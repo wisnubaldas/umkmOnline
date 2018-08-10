@@ -26,12 +26,12 @@
   <div class="row">
     <!-- /.col -->
     <div class="col-xs-12">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+      <button type="submit" class="btn bg-purple btn-lg btn-block">Masuk</button>
     </div>
     <!-- /.col -->
   </div>
 </form>
 <br>
-<a href="{{ url('password/reset') }}">Lupa Password?</a><br>
-<a href="{{ url('register') }}" class="text-center">Registrasi Pengguna Baru</a>
+<a href="{{ url('password/reset') }}" class="text-orange">Lupa Password?</a><br>
+<a href="{{ url('register') }}" class="text-orange">Registrasi Pengguna Baru</a>
 @endsection

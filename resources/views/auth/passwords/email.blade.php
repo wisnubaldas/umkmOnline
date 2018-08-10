@@ -17,12 +17,12 @@
   <div class="row">
     <!-- /.col -->
     <div class="col-xs-12">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Lupa Password</button>
+      <button type="submit" class="btn bg-purple btn-lg btn-block">Lupa Password</button>
     </div>
     <!-- /.col -->
   </div>
 </form>
 <br>
-<a href="{{ url('login') }}">Masuk</a><br>
-<a href="{{ url('register') }}" class="text-center">Registrasi Pengguna Baru</a>
+<a href="{{ url('login') }}" class="text-orange">Masuk</a><br>
+<a href="{{ url('register') }}" class="text-orange">Registrasi Pengguna Baru</a>
 @endsection

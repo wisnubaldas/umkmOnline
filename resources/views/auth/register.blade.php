@@ -43,12 +43,12 @@
   <div class="row">
     <!-- /.col -->
     <div class="col-xs-12">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Daftar Baru</button>
+      <button type="submit" class="btn bg-purple btn-lg btn-block">Daftar Baru</button>
     </div>
     <!-- /.col -->
   </div>
 </form>
 <br>
-<a href="{{ url('password/reset') }}">Lupa Password?</a><br>
-<a href="{{ url('login') }}" class="text-center">Masuk</a>
+<a href="{{ url('password/reset') }}" class="text-orange">Lupa Password?</a><br>
+<a href="{{ url('login') }}" class="text-orange">Masuk</a>
 @endsection

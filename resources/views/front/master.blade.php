@@ -16,9 +16,6 @@
         <div class="container">
           <div class="navbar-header">
             <a href="{{ url('/') }}" class="navbar-brand">{{ config('app.name') }}</a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-              <i class="fa fa-bars"></i>
-            </button>
           </div>
 
           <div class="collapse navbar-collapse pull-left" id="navbar-collapse"></div>
@@ -161,32 +158,57 @@
       <!-- /.container-fluid -->
       </nav>
     </header>
-      <!-- Full Width Column -->
-      <div class="content-wrapper">
+   @if(request()->route()->getName() == 'home')
+      <div class="jumbotron bg-purple" style="margin-bottom: 0">
         <div class="container">
-          <!-- Content Header (Page header) -->
-          <section class="content-header">
-            <h1>
-              @yield('title')
-              <small>@yield('page-description')</small>
-            </h1>
-            <ol class="breadcrumb">
-              <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</a></li>
-              @yield('breadcrumb')
-            </ol>
-          </section>
-
-          <!-- Main content -->
-          <section class="content">
-            
-            @yield('content')
-            
-          </section>
-          <!-- /.content -->
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+              <h1 class="text-center">
+                {{ strtoupper(config('app.name')) }}
+              </h1>
+              <p class="text-center text-orange">
+                <strong><cite>[ Belanja irit, Berjualan profit ]</cite></strong>
+              </p>
+              <div class="text-center">
+                <a href="{{ url('belanja') }}" class="btn bg-orange btn-lg">
+                  Mulai Belanja
+                </a>
+              </div>
+              <br>
+            </div>
+          </div>
         </div>
-      <!-- /.container -->
       </div>
-    <!-- /.content-wrapper -->
+    @endif
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+      <div class="container">
+
+        @if(request()->route()->getName() != 'home' && request()->route()->getName() != 'belanja')
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            @yield('title')
+            <small>@yield('page-description')</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</a></li>
+            @yield('breadcrumb')
+          </ol>
+        </section>
+        @endif
+
+        <!-- Main content -->
+        <section class="content">
+          
+          @yield('content')
+          
+        </section>
+        <!-- /.content -->
+      </div>
+    <!-- /.container -->
+    </div>
+  <!-- /.content-wrapper -->
     <footer class="main-footer">
       <div class="container">
         <strong>Copyright &copy; {{ date('Y') }} <a href="{{ url('/') }}">{{ config('app.name') }}</a>.</strong> All rights

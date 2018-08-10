@@ -15,7 +15,7 @@
     @endif
   </div>
   <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : ''}}">
-    <input type="password" name="password" class="form-control" placeholder="Password">
+    <input type="password" name="password" class="form-control" placeholder="Password Baru">
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     @if($errors->has('password'))
       <span class="help-block">
@@ -24,7 +24,7 @@
     @endif
   </div>
   <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : ''}}">
-    <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password">
+    <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password Baru">
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     @if($errors->has('password_confirmation'))
       <span class="help-block">
@@ -35,7 +35,7 @@
   <div class="row">
     <!-- /.col -->
     <div class="col-xs-12">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Atur Ulang</button>
+      <button type="submit" class="btn bg-purple btn-lg btn-block">Atur Ulang</button>
     </div>
     <!-- /.col -->
   </div>

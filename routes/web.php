@@ -25,8 +25,10 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-// FOR USER ROLE
 Route::get('/', 'PageController@index')->name('home');
+Route::get('/belanja', 'PageController@belanja')->name('belanja');
+Route::get('{slug}', 'PageController@detailProduct')->where('slug', '[0-9\-]+[a-z\-]+');
+Route::get('toko/{slug}', 'PageController@detailToko')->where('slug', '[a-z\-]+');
 
 //product
 Route::get('product/create', 'ProductController@create')->name('product.create');
@@ -52,12 +54,18 @@ Route::get('payment', 'PaymentController@index')->name('payment.index');
 Route::post('payment', 'PaymentController@store')->name('payment.store');
 Route::get('payment/{code}', 'PaymentController@show')->name('payment.show');
 
-Route::get('payment-confirmation', 'PaymentConfirmationController@create')->name('payment-confirmation.create');
-Route::post('payment-confirmation', 'PaymentConfirmationController@store')->name('payment-confirmation.store');
-Route::get('payment-confirmation/{paymentConfirmation}/edit', 'PaymentConfirmationController@edit')->name('payment-confirmation.edit');
-Route::get('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@show')->name('payment-confirmation.show');
-Route::patch('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@update')->name('payment-confirmation.update');
-Route::delete('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@destroy')->name('payment-confirmation.destroy');
+Route::get('payment-confirmation', 'PaymentConfirmationController@create')
+->name('payment-confirmation.create');
+Route::post('payment-confirmation', 'PaymentConfirmationController@store')
+->name('payment-confirmation.store');
+Route::get('payment-confirmation/{paymentConfirmation}/edit', 'PaymentConfirmationController@edit')
+->name('payment-confirmation.edit');
+Route::get('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@show')
+->name('payment-confirmation.show');
+Route::patch('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@update')
+->name('payment-confirmation.update');
+Route::delete('payment-confirmation/{paymentConfirmation}', 'PaymentConfirmationController@destroy')
+->name('payment-confirmation.destroy');
 
 //order (pembelian)
 Route::get('buy', 'BuyController@index')->name('buy.index');
