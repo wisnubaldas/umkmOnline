@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\StoreActivatedForSeller;
 use App\Store;
 
 class StoreController extends Controller
@@ -33,6 +34,10 @@ class StoreController extends Controller
     {
         $store->is_active = 1;
         $store->save();
+
+        //notify seller
+        $store->user->notify(new StoreActivatedForSeller($store));
+
         return redirect()->route('admin.store.show', ['store' => $store]);
     }
 

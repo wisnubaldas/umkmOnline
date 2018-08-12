@@ -30,6 +30,18 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- User Account Menu -->
+                        {{--notification link--}}
+                        <li>
+                            <a href="{{ url('admin/notification') }}">
+                                <i class="fa fa-bell-o"></i>
+                                @if(Auth::user()->unreadNotifications->count() > 0)
+                                    <span class="label label-warning">
+                                        {{ Auth::user()->unreadNotifications->count() }}
+                                    </span>
+                                @endif
+                            </a>
+                        </li>
+
                         <li class="dropdown tasks-menu user user-menu">
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

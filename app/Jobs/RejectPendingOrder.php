@@ -7,7 +7,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Notifications\OrderRejectedForBuyer;
+use App\Notifications\NewRefundForAdmin;
 use App\Order;
+use App\User;
 
 class RejectPendingOrder implements ShouldQueue
 {
@@ -34,6 +37,17 @@ class RejectPendingOrder implements ShouldQueue
         if ($order->isPending()) {
             $order->status_id = 5;
             $order->save();
+
+            //notify buyer
+            $order->user->notify(new OrderRejectedForBuyer($order));
+
+            //notify admin
+            $users = User::all();
+            foreach ($users as $user) {
+                if ($user->isAdmin() || $user->isOperator()) {
+                    $user->notify(new NewRefundForAdmin($order));
+                }
+            }
         }
     }
 }

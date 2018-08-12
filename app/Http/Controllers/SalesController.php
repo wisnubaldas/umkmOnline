@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Jobs\FinishOrder;
+use App\Notifications\OrderApprovedForBuyer;
+use App\Notifications\OrderSentForBuyer;
 use App\Order;
 
 class SalesController extends Controller
@@ -46,6 +48,10 @@ class SalesController extends Controller
     {
         $order->status_id = 2;
         $order->save();
+
+        //notify buyer
+        $order->user->notify(new OrderApprovedForBuyer($order));
+
         return back();
     }
 
@@ -54,6 +60,9 @@ class SalesController extends Controller
         $order->resi_number = $request->resi_number;
         $order->status_id = 3;
         $order->save();
+
+        //notify buyer
+        $order->user->notify(new OrderSentForBuyer($order));
 
         //job for finish order
         FinishOrder::dispatch($order)->delay(now()->addMinutes(env('FINORMIN_QUEUE')));

@@ -25,6 +25,18 @@
             <ul class="nav navbar-nav">
               @if(Auth::check())
 
+                {{--notification link--}}
+                <li>
+                    <a href="{{ url('notification') }}">
+                        <i class="fa fa-bell-o"></i>
+                        @if(Auth::user()->unreadNotifications->count() > 0)
+                            <span class="label label-warning">
+                                {{ Auth::user()->unreadNotifications->count() }}
+                            </span>
+                        @endif
+                    </a>
+                </li>
+
                 {{--message--}}
                 <li>
                   <a href="{{ url('product-conversation') }}">

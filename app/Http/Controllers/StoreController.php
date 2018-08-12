@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\NewStoreForAdmin;
 use App\Store;
 use App\StoreBank;
 use App\Address;
@@ -74,6 +75,13 @@ class StoreController extends Controller
             'bank_account' => $request->bank_account,
             'under_the_name' => $request->under_the_name
         ]);
+
+        //notify admin
+        foreach (\App\User::all() as $user) {
+            if ($user->isAdmin() || $user->isOperator()) {
+                $user->notify(new NewStoreForAdmin($store));
+            }
+        }
 
     	return redirect()->route('store.yours')->with('success', 'Toko sudah dibuat. Tunggu sampai admin mengaktifkan toko anda');
     }

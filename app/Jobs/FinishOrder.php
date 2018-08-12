@@ -7,6 +7,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Notifications\FinishedOrderForSeller;
+use App\Notifications\NewAdminPaymentForAdmin;
 use App\Order;
 
 class FinishOrder implements ShouldQueue
@@ -35,6 +37,17 @@ class FinishOrder implements ShouldQueue
         if ($order->isSent()) {
             $order->status_id = 4;
             $order->save();
+
+            //notify seller
+            $order->store->user->notify(new FinishedOrderForSeller($order));
+
+            //notify admin
+            $users = \App\User::all();
+            foreach ($users as $user) {
+                if ($user->isAdmin() || $user->isOperator()) {
+                    $user->notify(new NewAdminPaymentForAdmin($order));
+                }
+            }
         }
     }
 }

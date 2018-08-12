@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\FinishedOrderForSeller;
+use App\Notifications\NewAdminPaymentForAdmin;
 use App\Payment;
 use App\Order;
 
@@ -38,6 +40,19 @@ class BuyController extends Controller
     {
     	$order->status_id = 4;
     	$order->save();
+
+        // notify seller
+        $seller = $order->store->user;
+        $seller->notify(new FinishedOrderForSeller($order));
+
+        //notify admin
+        $users = \App\User::all();
+        foreach ($users as $user) {
+            if ($user->isAdmin() || $user->isOperator()) {
+                $user->notify(new NewAdminPaymentForAdmin($order));
+            }
+        }
+        
     	return redirect()->route('buy.index');
     }
 }

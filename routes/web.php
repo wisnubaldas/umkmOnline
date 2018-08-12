@@ -109,6 +109,9 @@ Route::get('product-conversation/{productConversation}', 'ProductConversationCon
 Route::patch('product-conversation/{productConversation}', 'ProductConversationController@update');
 Route::get('product-conversation/{productConversation}/read', 'ProductConversationController@read');
 
+//notification
+Route::get('notification', 'NotificationController@index')->name('notification.index');
+
 //FOR ADMIN ROLE
 Route::prefix('admin')->group(function(){
 	//Dashboard
@@ -136,6 +139,9 @@ Route::prefix('admin')->group(function(){
 	Route::get('store/{store}', 'Admin\StoreController@show')->name('admin.store.show');
 	Route::patch('store/{store}/activate', 'Admin\StoreController@activate')->name('admin.store.activate');
 	Route::patch('store/{store}/nonactivate', 'Admin\StoreController@nonActivate')->name('admin.store.nonactivate');
+
+	//notification
+	Route::get('notification', 'Admin\NotificationController@index')->name('admin.notification.index');
 });
 
 //Additional for ajax

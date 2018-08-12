@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\UserPaymentConfirmation;
 use Carbon\Carbon;
 use App\Payment_confirmation;
 use App\Payment;
 use App\AdminBank;
+use App\User;
 use File;
 
 class PaymentConfirmationController extends Controller
@@ -57,6 +59,9 @@ class PaymentConfirmationController extends Controller
     		'amount' => $request->amount,
     		'image' => $filename
     	]);
+
+        //notify admin/operator
+        $this->notifyAdmin($payment);
 
     	//success
     	return redirect()->route('payment.show', ['code' => $payment->code])
@@ -118,5 +123,15 @@ class PaymentConfirmationController extends Controller
         //success
         return redirect()->route('payment.show', ['code' => $paymentConfirmation->payment->code])
         ->with('success', 'Konfirmasi Pembayaran telah dihapus. Untuk memproses pesanan anda kami perlu meninjau konfirmasi pemabayaran anda. Silahkan anda konfirmasi jika sudah melakukan pembayaran');
+    }
+
+    private function notifyAdmin($payment)
+    {
+        $users = User::all();
+        foreach ($users as $user) {
+            if ($user->isAdmin() || $user->isOperator()) {
+                $user->notify(new UserPaymentConfirmation($payment));
+            }
+        }
     }
 }

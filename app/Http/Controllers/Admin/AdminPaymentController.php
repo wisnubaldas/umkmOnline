@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\PaidAdminPaymentForSeller;
 use Carbon\Carbon;
 use App\Order;
 use App\AdminBank;
@@ -61,6 +62,9 @@ class AdminPaymentController extends Controller
     		'amount' => $request->amount,
     		'image' => $filename
     	]);
+
+        //notify seller
+        $order->store->user->notify(new PaidAdminPaymentForSeller($order));
 
     	//success
     	return redirect()->route('admin.adminPayment.index')

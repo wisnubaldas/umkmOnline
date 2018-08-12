@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\PaidRefundForBuyer;
 use Carbon\Carbon;
 use App\Order;
 use App\AdminBank;
@@ -62,6 +63,9 @@ class RefundController extends Controller
     		'amount' => $request->amount,
     		'image' => $filename
     	]);
+
+        //notify buyer
+        $order->user->notify(new PaidRefundForBuyer($order));
 
     	//success
     	return redirect()->route('admin.refund.index')
