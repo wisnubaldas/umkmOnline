@@ -15,9 +15,11 @@
 				class="img-responsive" style="margin-bottom: 5px">
 				@if(Auth::id() != $store->user->id)
 				{{--chat btn--}}
-				<button class="btn btn-default btn-lg btn-block">
+				<button class="btn btn-default btn-lg btn-block"
+				onclick="{{ ! Auth::check() ? 'window.location.href = "' . 
+				url('login') . '"' : 'showTanyaPenjualModal()' }}">
 					<i class="fa fa-comments"></i>
-					Chat Penjual
+					Tanya Penjual
 				</button>
 				{{--tambah ke keranjang--}}
 				<button class="btn bg-orange btn-lg btn-block"
@@ -209,6 +211,36 @@
 		</div>
 	</div>
 </div>
+
+{{-- tanya penjual modal --}}
+<div class="modal" id="tanyaPenjualModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-purple">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Tanya Penjual</h4>
+			</div>
+			<div class="modal-body">
+				<form id="tanyaPenjualForm" method="post" action="{{ url('product-conversation') }}">
+					{{ csrf_field() }}
+					<input type="hidden" name="product_id" value="{{ $product->id }}">
+					<div class="form-group">
+						<label>Pesan</label>
+						<textarea name="message" class="form-control" required></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn bg-orange">
+							<i class="fa fa-paper-plane"></i>
+							Kirim
+						</button>
+						<span class="label label-success pull-right" id="sentMessage"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 @endsection
 @push('scripts')
 <script>
@@ -241,6 +273,26 @@
 				}
 			});
 		});
+
+		//form kirim pesan
+		$('body').on('submit', '#tanyaPenjualForm', function(e){
+			e.preventDefault();
+			var url = $(this).attr('action');
+			var data = $(this).serialize();
+			$.ajax({
+				method: 'post',
+				url: url,
+				data: data,
+				error: function(msg){
+					console.log(msg.responseJSON);
+				},
+				success: function(data){
+					var modal = $('#tanyaPenjualModal');
+					modal.find('#tanyaPenjualForm').find('textarea').val('');
+					$('#sentMessage').text(data);
+				}
+			});
+		});
 	});
 
 	function showAddCartModal(url) {
@@ -267,6 +319,15 @@
 		if (quantity == 0) { $('#addCartModal #buyBtn').attr('disabled', 'disabled') }
 		else { $('#addCartModal #buyBtn').attr('disabled', false) }
 		$('#subtotal').text(price * quantity); 
+	}
+
+	function showTanyaPenjualModal()
+	{
+		var modal = $('#tanyaPenjualModal');
+		var form = modal.find('#tanyaPenjualForm');
+		$('#sentMessage').text('');
+		form.find('textarea[name="message"]').val('');
+		modal.modal('show');
 	}
 </script>
 @endpush

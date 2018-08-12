@@ -102,6 +102,13 @@ Route::get('change-password', 'ProfileController@editPassword')->name('profile.c
 Route::patch('change-password', 'ProfileController@updatePassword')->name('profile.update-password');
 Route::patch('profile/change-photo', 'ProfileController@changePhoto')->name('profile.change-photo');
 
+//product conversation
+Route::get('product-conversation', 'ProductConversationController@index')->name('productConversation.index');
+Route::post('product-conversation', 'ProductConversationController@store')->name('productConversation.store');
+Route::get('product-conversation/{productConversation}', 'ProductConversationController@show');
+Route::patch('product-conversation/{productConversation}', 'ProductConversationController@update');
+Route::get('product-conversation/{productConversation}/read', 'ProductConversationController@read');
+
 //FOR ADMIN ROLE
 Route::prefix('admin')->group(function(){
 	//Dashboard

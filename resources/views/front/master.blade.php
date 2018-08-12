@@ -24,6 +24,19 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               @if(Auth::check())
+
+                {{--message--}}
+                <li>
+                  <a href="{{ url('product-conversation') }}">
+                    <i class="fa fa-comments"></i>
+                    @if(Auth::user()->unreadMessageCount() > 0)
+                    <span class="label label-warning">
+                      {{ Auth::user()->unreadMessageCount() }}
+                    </span>
+                    @endif
+                  </a>
+                </li>
+
                 <li>
                   <a href="{{ url('cart') }}">
                     <i class="fa fa-shopping-cart"></i>
@@ -34,7 +47,8 @@
                     @endif
                   </a>
                 </li>
-               
+                
+
                {{--user menu--}}
                 <li class="dropdown tasks-menu user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">

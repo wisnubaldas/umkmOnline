@@ -70,6 +70,29 @@ class User extends Authenticatable
         return asset('img/user/null/letter-'.$firstChar.'.png');
     }
 
+    public function sellerUnreadMessageCount()
+    {
+        $count = 0;
+        foreach ($this->seller_product_conversations as $conv) {
+            $count += $conv->unreadMessageCount();
+        }
+        return $count;
+    }
+
+    public function buyerUnreadMessageCount()
+    {
+        $count = 0;
+        foreach ($this->buyer_product_conversations as $conv) {
+            $count += $conv->unreadMessageCount();
+        }
+        return $count;
+    }
+
+    public function unreadMessageCount()
+    {
+        return $this->sellerUnreadMessageCount() + $this->buyerUnreadMessageCount();
+    }
+
     //relation
     public function role()
     {
@@ -99,6 +122,21 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasOne('App\Address');
+    }
+
+    public function seller_product_conversations()
+    {
+        return $this->hasMany('App\ProductConversation', 'seller_id');
+    }
+
+    public function buyer_product_conversations()
+    {
+        return $this->hasMany('App\ProductConversation', 'buyer_id');
+    }
+
+    public function product_messages()
+    {
+        return $this->hasMany('App\ProductMessages');
     }
 
     public function sendPasswordResetNotification($token)

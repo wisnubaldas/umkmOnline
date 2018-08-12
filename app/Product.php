@@ -58,4 +58,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Order_detail');
     }
+
+    public function conversations()
+    {
+        return $this->has_many('App\ProductConversation');
+    }
 }
