@@ -25,7 +25,7 @@
 				<button class="btn bg-orange btn-lg btn-block"
 				onclick="{{ ! Auth::check() ? 'window.location.href = "' . 
 				url('login') . '"' : 'showAddCartModal("'.url("product/".$product->id).'")'}}"
-				{{ !$product->isInStock() ? 'disabled' : ''}}>
+				{{ $product->isInStock() && $store->isActive() ? '' : 'disabled'}}>
 					<i class="fa fa-cart-plus"></i>
 					Tambah ke keranjang
 				</button>
@@ -56,6 +56,13 @@
 		</div>
 	</div>
 	<div class="col-sm-8">
+		@if(!$store->isActive())
+			<div class="alert alert-warning alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h4><i class="icon fa fa-warning"></i> Alert!</h4>
+				Toko ini dalam status tidak aktif, anda tidak dapat membeli barang di toko ini.
+			</div>
+		@endif
 		<div class="box box-solid">
 			<div class="box-body">
 				<div class="table-responsive">

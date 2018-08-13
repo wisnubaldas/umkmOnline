@@ -46,12 +46,22 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                <img 
-                                src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image()) }}" 
+                                src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image) }}" 
                                 class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li>
+                                  <ul class="menu">
+                                    <li>
+                                      <a href="{{ url('/') }}" class="text-purple">
+                                          <i class="fa fa-home"></i>
+                                          Halaman Depan
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </li>
                                 <li>
                                   <ul class="menu">
                                     <li>
@@ -81,7 +91,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image()) }}" class="img-circle" alt="User Image">
+                        <img src="{{ is_null(Auth::user()->image) ? Auth::user()->nullphoto() : asset('img/user/'.Auth::user()->image) }}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>{{ Auth::user()->name }}</p>
@@ -172,6 +182,25 @@
                             @endif
                         </a>
                     </li>
+
+                    {{--pengguna--}}
+                    <li class="{{ request()->segment(1) == 'admin'
+                    && request()->segment(2) == 'user' ? 'active' : '' }}">
+                        <a href="{{ url('admin/user') }}">
+                            <i class="fa fa-users"></i>
+                            <span>Pengguna</span>
+                        </a>
+                    </li>
+
+                    {{--category & admin bank--}}
+                    <li class="{{ request()->segment(1) == 'admin'
+                    && request()->segment(2) == 'setting' ? 'active' : '' }}">
+                        <a href="{{ url('admin/setting') }}">
+                            <i class="fa fa-sliders"></i>
+                            <span>Pengaturan</span>
+                        </a>
+                    </li>
+                    
                 </ul>
             <!-- /.sidebar-menu -->
             </section>
@@ -187,7 +216,7 @@
                     <small>@yield('page-description')</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="{{ url('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                    <li><a href="{{ url('admin/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                     @yield('breadcrumb')
                 </ol>
             </section>

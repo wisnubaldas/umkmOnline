@@ -140,6 +140,26 @@ Route::prefix('admin')->group(function(){
 	Route::patch('store/{store}/activate', 'Admin\StoreController@activate')->name('admin.store.activate');
 	Route::patch('store/{store}/nonactivate', 'Admin\StoreController@nonActivate')->name('admin.store.nonactivate');
 
+	//user
+	Route::get('user', 'Admin\UserController@index')->name('admin.user.index');
+	Route::get('user/{user}/profile', 'Admin\UserController@profile')->name('admin.user.profile');
+	Route::delete('user/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
+
+	//category
+	Route::get('category', 'Admin\CategoryController@index')->name('admin.category.index');
+	Route::post('category', 'Admin\CategoryController@store')->name('admin.category.store');
+	Route::delete('category/{category}', 'Admin\CategoryController@destroy')->name('admin.category.destroy');
+
+	//admin bank
+	Route::get('admin-bank', 'Admin\AdminBankController@index')->name('admin.bank.index');
+	Route::post('admin-bank', 'Admin\AdminBankController@store')->name('admin.bank.store');
+	Route::get('admin-bank/{adminBank}/edit', 'Admin\AdminBankController@edit')->name('admin.bank.edit');
+	Route::patch('admin-bank/{adminBank}', 'Admin\AdminBankController@update')->name('admin.bank.update');
+	Route::delete('admin-bank/{adminBank}', 'Admin\AdminBankController@destroy')->name('admin.bank.destroy');
+
+	//setting
+	Route::get('setting', 'Admin\SettingController@index')->name('admin.setting.index');
+
 	//notification
 	Route::get('notification', 'Admin\NotificationController@index')->name('admin.notification.index');
 });

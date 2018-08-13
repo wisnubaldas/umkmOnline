@@ -7,7 +7,7 @@
 			<div class="row">
 				@foreach($store->products as $product)
 				<div class="col-sm-2">
-					<a href="{{ url('admin/product/'.$product->id) }}">
+					<a href="{{ url($product->slug) }}">
 						<div class="attachment-block">
 							<img src="{{ $product->hasImage() ? asset('img/product/'.$product->image) :
 							asset('img/product/null.jpg') }}" 
