@@ -16,21 +16,21 @@ class AdminBanksTableSeeder extends Seeder
         	[
         		'bank_name' => 'BRI',
         		'bank_account' => '32100567849',
-        		'under_the_name' => 'UMKM ONLINE',
+        		'under_the_name' => 'SIMARDES',
         		'created_at' => now(),
         		'updated_at' => now()
         	],
         	[
         		'bank_name' => 'BCA',
                 'bank_account' => '32100567848',
-                'under_the_name' => 'UMKM ONLINE',
+                'under_the_name' => 'SIMARDES',
         		'created_at' => now(),
         		'updated_at' => now()
         	],
         	[
         		'bank_name' => 'MANDIRI',
                 'bank_account' => '32100567847',
-                'under_the_name' => 'UMKM ONLINE',
+                'under_the_name' => 'SIMARDES',
         		'created_at' => now(),
         		'updated_at' => now()
         	]

@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         	[
         		'id' => 1,
         		'name' => 'Root',
-        		'email' => 'admin@root.com',
+        		'email' => 'yudimashudi7@gmail.com',
         		'password' => bcrypt('rahasia'),
         		'role_id' => 1,
         		'created_at' => now(),
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
         	[
         		'id' => 2,
         		'name' => 'Yudi Mashudi',
-        		'email' => 'yudimashudi@gmail.com',
+        		'email' => 'yudimashudi8@gmail.com',
         		'password' => bcrypt('rahasia'),
         		'role_id' => 2,
         		'created_at' => now(),
@@ -65,46 +65,46 @@ class UsersTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'phone' => '085228761234',
-                'address' => 'Blok A RT 04 RW 01 Desa Rajagaluhlor Kecamatan Rajagaluh',
+                'address' => 'Blok Hegarmanah RT 04 RW 05 Desa Pasindangan Kecamatan Jatitujuh',
                 'city_id' => 252,
                 'province_id' => 9,
-                'postal_code' => '45472'
+                'postal_code' => '45456'
             ],
 
             [
                 'user_id' => 2,
                 'phone' => '085228761234',
-                'address' => 'Blok A RT 04 RW 01 Desa Rajagaluhlor Kecamatan Rajagaluh',
+                'address' => 'Blok Hegarmanah RT 04 RW 05 Desa Pasindangan Kecamatan Jatitujuh',
                 'city_id' => 252,
                 'province_id' => 9,
-                'postal_code' => '45472'
+                'postal_code' => '45456'
             ],
 
             [
                 'user_id' => 3,
                 'phone' => '085228761234',
-                'address' => 'Blok A RT 04 RW 01 Desa Rajagaluhlor Kecamatan Rajagaluh',
+                'address' => 'Blok Hegarmanah RT 04 RW 05 Desa Pasindangan Kecamatan Jatitujuh',
                 'city_id' => 252,
                 'province_id' => 9,
-                'postal_code' => '45472'
+                'postal_code' => '45456'
             ],
 
             [
                 'user_id' => 4,
                 'phone' => '085228761234',
-                'address' => 'Blok A RT 04 RW 01 Desa Rajagaluhlor Kecamatan Rajagaluh',
+                'address' => 'Blok Hegarmanah RT 04 RW 05 Desa Pasindangan Kecamatan Jatitujuh',
                 'city_id' => 252,
                 'province_id' => 9,
-                'postal_code' => '45472'
+                'postal_code' => '45456'
             ],
 
             [
                 'user_id' => 5,
                 'phone' => '085228761234',
-                'address' => 'Blok A RT 04 RW 01 Desa Rajagaluhlor Kecamatan Rajagaluh',
+                'address' => 'Blok Hegarmanah RT 04 RW 05 Desa Pasindangan Kecamatan Jatitujuh',
                 'city_id' => 252,
                 'province_id' => 9,
-                'postal_code' => '45472'
+                'postal_code' => '45456'
             ]
         ]);
     }
