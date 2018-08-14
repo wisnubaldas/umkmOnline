@@ -14,17 +14,27 @@
 	<div class="col-sm-12">
 		<div class="box box-solid">
 			<div class="box-header with-border">
-				<form method="get" action="{{ url('admin/user') }}">
-					<div class="input-group input-group">
-		                <input type="text" class="form-control" name="user_name" value="{{ request('user_name') }}" 
-		                placeholder="Cari nama pengguna" required autocomplete="off">
-	                    <span class="input-group-btn">
-	                      <button type="submit" class="btn btn-info btn-flat">
-	                      	<i class="fa fa-search"></i>
-	                      </button>
-	                    </span>
-		             </div>
-				</form>
+				<div class="row">
+					<div class="col-sm-6">
+						<a href="{{ url('admin/user/print') }}" target="_blank" class="btn bg-navy">
+							<i class="fa fa-print"></i>
+							Cetak
+						</a>
+					</div>
+					<div class="col-sm-6">
+						<form method="get" action="{{ url('admin/user') }}">
+							<div class="input-group input-group">
+				                <input type="text" class="form-control" name="user_name" value="{{ request('user_name') }}" 
+				                placeholder="Cari nama pengguna" required autocomplete="off">
+			                    <span class="input-group-btn">
+			                      <button type="submit" class="btn btn-info btn-flat">
+			                      	<i class="fa fa-search"></i>
+			                      </button>
+			                    </span>
+				             </div>
+						</form>
+					</div>
+				</div>
 			</div>
 			<div class="box-body">
 				<div class="table-responsive">

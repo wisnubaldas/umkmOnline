@@ -1,20 +1,9 @@
 @extends('back.master')
-@section('title', 'Pembayaran Keluar')
+@section('title', 'Pesanan / Order')
 @section('breadcrumb')
-<li class="active">Pembayaran Keluar</li>
+<li class="active">Pesanan / Order</li>
 @endsection
 @section('content')
-@if(session('success'))
-	<div class="alert alert-success alert-dismissible">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-		<h4><i class="icon fa fa-check"></i> Sukses!</h4>
-		{{ session('success') }}
-	</div>
-@endif
-<div class="callout callout-info">
-	<h4><i class="icon fa fa-info"></i> Info!</h4>
-	<strong>Pembayaran Keluar</strong> adalah Pembayaran yang dilakukan <strong>Admin/Operator</strong> kepada <strong>Toko</strong> ketika Pesanannya sudah sampai ke tangan pembeli. Tugas anda sebagai <strong>Admin/Operator</strong> adalah melakukan pembayaran kepada <strong>Toko</strong> dengan cara transfer ke <strong>Rekening Bank Toko</strong> dan mengisi <strong>Bukti Pembayaran</strong>.
-</div>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="box box-solid">
@@ -27,17 +16,17 @@
 						</button>
 					</div>
 					<div class="col-sm-6">
-						<form method="get" action="{{ route('admin.adminPayment.index') }}">
+						<form method="get" action="{{ route('admin.order.index') }}">
 							<div class="input-group input-group">
 				                <input type="text" class="form-control" name="code" value="{{ request('code') }}" 
-				                placeholder="Cari Kode" required autocomplete="off">
+				                placeholder="Cari Kode Pesanan" required autocomplete="off">
 			                    <span class="input-group-btn">
 			                      <button type="submit" class="btn btn-info btn-flat">
 			                      	<i class="fa fa-search"></i>
 			                      </button>
 			                    </span>
 				             </div>
-						</form>	
+						</form>
 					</div>
 				</div>
 			</div>
@@ -46,11 +35,11 @@
 					<table class="table table-bordered table-sm table-hover">
 						<thead class="bg-info">
 							<th class="text-center">#</th>
-							<th class="text-center">Kode Pesanan</th>
-							<th class="text-center">Jumlah Pembayaran</th>
-							<th class="text-center">Toko</th>
-							<th class="text-center">Tanggal Pesanan Sampai</th>
+							<th class="text-center">Kode</th>
+							<th class="text-center">Pembeli</th>
+							<th class="text-center">Penjual</th>
 							<th class="text-center">Status</th>
+							<th class="text-center">Tanggal</th>
 							<th class="text-center">#</th>
 						</thead>
 						<tbody>
@@ -59,29 +48,27 @@
 									<tr>
 										<td class="text-right">{{ $index + $orders->firstItem() }}</td>
 										<td>{{ $order->getCode() }}</td>
-										<td class="text-right">{{ $order->totalTagihanStringFormatted() }}</td>
+										<td>{{ $order->user->name }}</td>
 										<td>{{ $order->store->name }}</td>
-										<td class="text-right">
-											{{ $order->tanggalUpdate() }}
-										</td>
 										<td class="text-center">
-											<span class="label 
-											{{ $order->isPaidAdminPayment() ? 'label-success' : 'label-warning' }}">
-												{{ $order->adminPaymentStatus() }}
+											<span class="label {{ $order->isPending() ? 'bg-yellow' : (
+											$order->isAccepted() ? 'bg-info' : (
+											$order->isSent() ? 'bg-blue' : (
+											$order->isFinished() ? 'bg-green' : 'bg-red'))) }}">
+												{{ $order->status->name }}
 											</span>
 										</td>
+										<td class="text-right">
+											{{ $order->tanggal() }}
+										</td>
 										<td class="text-center">
-											@if($order->isPaidAdminPayment())
-												<a href="{{ url('admin/admin-payment/'.$order->code) }}" 
-												class="btn btn-default btn-xs adminPaymentbtn">
-													Bukti Pembayaran Toko
-												</a>
-											@else
-												<a href="{{ url('admin/admin-payment/create/'.$order->code) }}" 
-												class="btn bg-orange btn-xs">
-													Buat Bukti Pembayaran Toko
-												</a>
-											@endif
+											<div class="btn-group">
+												<button class="btn btn-default btn-xs detailBtn"
+												url="{{ url('admin/order/'.$order->id.'/detail') }}"
+												modal-target="#orderDetailModal">
+													Detail
+												</button>
+											</div>
 										</td>
 									</tr>
 								@endforeach
@@ -89,9 +76,9 @@
 								<tr>
 									<td colspan="7">
 										@if(request('code'))
-											Pembayaran keluar tidak ditemukan
+											Pesanan tidak ditemukan
 										@else
-											Belum ada pembayaran keluar
+											Belum ada Pesanan
 										@endif
 									</td>
 								</tr>
@@ -104,8 +91,8 @@
 		</div>
 	</div>
 </div>
-{{--bukti pembayaran modal--}}
-<div class="modal fade" id="adminPaymentModal">
+{{--payment detail modal--}}
+<div class="modal" id="orderDetailModal">
 	<div class="modal-dialog modal-lg"></div>
 </div>
 {{--print modal--}}
@@ -115,10 +102,10 @@
 			<div class="modal-header bg-purple">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">×</span></button>
-				<h4 class="modal-title">Cetak Pembayaran Keluar</h4>
+				<h4 class="modal-title">Cetak Pesanan</h4>
 			</div>
 			<div class="modal-body">
-				<form method="get" action="{{ route('admin.adminPayment.print') }}" target="_blank">
+				<form method="get" action="{{ route('admin.order.print') }}" target="_blank">
 					<div class="form-group">
 						<label>Dari</label>
 						<input type="text" name="dari" class="form-control datepicker" required>
@@ -140,10 +127,9 @@
 @push('scripts')
 <script>
 	$(function(){
-		$('body').on('click', '.adminPaymentbtn', function(e){
-			e.preventDefault();
-			var url = $(this).attr('href');
-			var modal = $('#adminPaymentModal');
+		$('body').on('click', '.detailBtn', function(){
+			var modal = $($(this).attr('modal-target'));
+			var url = $(this).attr('url');
 			$.ajax({
 				method: 'get',
 				url: url,
@@ -154,7 +140,7 @@
 					modal.find('.modal-dialog').html(data);
 					modal.modal('show');
 				}
-			})
+			});
 		});
 
 		$('#printBtn').on('click', function(){

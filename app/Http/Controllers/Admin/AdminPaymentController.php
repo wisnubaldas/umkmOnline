@@ -14,7 +14,7 @@ class AdminPaymentController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
+    	$this->middleware(['auth', 'admin.only']);
     }
 
     public function index()
@@ -80,5 +80,13 @@ class AdminPaymentController extends Controller
         $order = Order::where('code', $code)->firstOrFail();
         $adminPayment = $order->admin_payment()->firstOrFail();
         return view('back.adminPayment.show', compact('adminPayment'));
+    }
+
+    public function print()
+    {
+        $dari = Carbon::createFromFormat('d/m/Y', request('dari'))->toDateString();
+        $sampai = Carbon::createFromFormat('d/m/Y', request('sampai'))->toDateString();
+        $orders = Order::where('status_id', 4)->whereBetween('created_at', [$dari, $sampai])->get();
+        return view('print.admin_payment', compact('orders'));
     }
 }

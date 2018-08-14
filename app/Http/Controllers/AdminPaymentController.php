@@ -27,4 +27,11 @@ class AdminPaymentController extends Controller
     	}
     	return view('front.adminPayment.show', compact('adminPayment'));
     }
+
+    public function print()
+    {
+        $orders = Auth::user()->store->orders()
+        ->where('status_id', 4)->orderBy('created_at', 'asc')->get();
+        return view('print.pendapatan_toko', compact('orders'));
+    }
 }

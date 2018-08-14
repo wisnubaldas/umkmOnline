@@ -14,7 +14,7 @@ class RefundController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
+    	$this->middleware(['auth', 'admin.only']);
     }
 
     public function index()
@@ -80,5 +80,13 @@ class RefundController extends Controller
     	$order = Order::where('code', $code)->firstOrFail();
     	$refund = $order->refund()->firstOrFail();
     	return view('back.refund.show', compact('refund'));
+    }
+
+    public function print()
+    {
+        $dari = Carbon::createFromFormat('d/m/Y', request('dari'))->toDateString();
+        $sampai = Carbon::createFromFormat('d/m/Y', request('sampai'))->toDateString();
+        $orders = Order::where('status_id', 5)->whereBetween('created_at', [$dari, $sampai])->get();
+        return view('print.refund', compact('orders'));
     }
 }

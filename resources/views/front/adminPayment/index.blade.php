@@ -9,6 +9,12 @@
 		<div class="box box-solid">
 			<div class="box-header with-border">
 				<h5 class="box-title">Daftar Transaksi Selesai</h5>
+				<div class="box-tools">
+					<a href="{{ route('adminPayment.print') }}" target="_blank" class="btn btn-sm bg-navy">
+						<i class="fa fa-print"></i>
+						Pendapatan Toko
+					</a>
+				</div>
 			</div>
 			<div class="box-body">
 				<div class="table table-responsive">

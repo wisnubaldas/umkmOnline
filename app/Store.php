@@ -32,11 +32,11 @@ class Store extends Model
         return asset('img/store/null-shop-icon.png');
     }
 
-    public function Sales()
+    public function sales()
     {
         $sales = 0;
-        foreach ($this->orders()->where('status_id', 2)->get() as $order) {
-            $sales += $order->order_details->sum('quantity');
+        foreach ($this->products as $product) {
+            $sales += $product->order_details->sum('quantity');
         }
         return $sales;
     }

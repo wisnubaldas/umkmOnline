@@ -39,6 +39,18 @@
 		</div>
 	</div>
 	<div class="col-sm-4 col-xs-6">
+		<div class="small-box bg-gray">
+			<div class="inner">
+				<h3>Daftar</h3>
+				<p>Pesanan</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-shopping-bag"></i>
+			</div>
+			<a href="{{ url('admin/order') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+		</div>
+	</div>
+	<div class="col-sm-4 col-xs-6">
 		<div class="small-box bg-aqua">
 			<div class="inner">
 				<h3>Info</h3>

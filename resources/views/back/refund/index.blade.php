@@ -19,17 +19,27 @@
 	<div class="col-sm-12">
 		<div class="box box-solid">
 			<div class="box-header with-border">
-				<form method="get" action="{{ route('admin.refund.index') }}">
-					<div class="input-group input-group">
-		                <input type="text" class="form-control" name="code" value="{{ request('code') }}" 
-		                placeholder="Cari Kode" required autocomplete="off">
-	                    <span class="input-group-btn">
-	                      <button type="submit" class="btn btn-info btn-flat">
-	                      	<i class="fa fa-search"></i>
-	                      </button>
-	                    </span>
-		             </div>
-				</form>
+				<div class="row">
+					<div class="col-sm-6">
+						<button id="printBtn" class="btn bg-navy">
+							<i class="fa fa-print"></i>
+							Cetak
+						</button>
+					</div>
+					<div class="col-sm-6">
+						<form method="get" action="{{ route('admin.refund.index') }}">
+							<div class="input-group input-group">
+				                <input type="text" class="form-control" name="code" value="{{ request('code') }}" 
+				                placeholder="Cari Kode" required autocomplete="off">
+			                    <span class="input-group-btn">
+			                      <button type="submit" class="btn btn-info btn-flat">
+			                      	<i class="fa fa-search"></i>
+			                      </button>
+			                    </span>
+				             </div>
+						</form>	
+					</div>
+				</div>
 			</div>
 			<div class="box-body">
 				<div class="table-responsive">
@@ -96,6 +106,34 @@
 <div class="modal fade" id="refundModal">
 	<div class="modal-dialog modal-lg"></div>
 </div>
+{{--print modal--}}
+<div class="modal fade" id="printModal">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header bg-purple">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Cetak Pengembalian Dana</h4>
+			</div>
+			<div class="modal-body">
+				<form method="get" action="{{ route('admin.refund.print') }}" target="_blank">
+					<div class="form-group">
+						<label>Dari</label>
+						<input type="text" name="dari" class="form-control datepicker" required>
+					</div>
+					<div class="form-group">
+						<label>Sampai</label>
+						<input type="text" name="sampai" class="form-control datepicker" required>
+					</div>
+					<button type="submit" class="btn bg-navy btn-block">
+						<i class="fa fa-print"></i>
+						Cetak
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 @endsection
 @push('scripts')
 <script>
@@ -115,6 +153,17 @@
 					modal.modal('show');
 				}
 			});
+		});
+
+		$('#printBtn').on('click', function(){
+			var modal = $('#printModal');
+			modal.find('input').val('');
+			modal.modal('show');
+		});
+
+		$('.datepicker').datepicker({
+			autoclose: true,
+			format: 'dd/mm/yyyy'
 		});
 	});
 </script>

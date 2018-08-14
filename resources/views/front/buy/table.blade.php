@@ -31,6 +31,12 @@
 					<td>
 						<button class="btn btn-default btn-xs detailOrderBtn"
 						url="{{ url('buy/'.$order->id) }}">Detail</button>
+						@if(!$order->isPending())
+						<a href="{{ url('buy/'.$order->id.'/print') }}" target="_blank" class="btn btn-xs bg-navy">
+							<i class="fa fa-print"></i>
+							Invoice
+						</a>
+						@endif
 						@if($order->isSent())
 							<button class="btn bg-orange btn-xs diterimaBtn"
 							url="{{ url('buy/'.$order->id.'/complete') }}">Sudah Diterima</button>

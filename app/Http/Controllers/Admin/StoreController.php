@@ -11,7 +11,7 @@ class StoreController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
+    	$this->middleware(['auth', 'admin.only']);
     }
 
     public function index()
@@ -46,5 +46,11 @@ class StoreController extends Controller
         $store->is_active = 0;
         $store->save();
         return redirect()->route('admin.store.show', ['store' => $store]);
+    }
+
+    public function print()
+    {
+        $stores = Store::all();
+        return view('print.store', compact('stores'));
     }
 }

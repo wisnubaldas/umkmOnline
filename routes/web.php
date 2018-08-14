@@ -72,6 +72,7 @@ Route::get('buy', 'BuyController@index')->name('buy.index');
 Route::get('buy/completed', 'BuyController@completed')->name('buy.completed');
 Route::get('buy/{order}', 'BuyController@show')->name('buy.show');
 Route::post('buy/{order}/complete', 'BuyController@completing')->name('buy.completing');
+Route::get('buy/{order}/print', 'BuyController@print')->name('buy.print');
 
 //refund
 Route::get('refund', 'RefundController@index')->name('refund.index');
@@ -86,6 +87,7 @@ Route::patch('sales/{order}/update-resi', 'SalesController@updateResi')->name('s
 
 //pendapatan toko
 Route::get('admin-payment', 'AdminPaymentController@index')->name('adminPayment.index');
+Route::get('admin-payment/print', 'AdminPaymentController@print')->name('adminPayment.print');
 Route::get('admin-payment/{adminPayment}', 'AdminPaymentController@show')->name('adminPayment.show');
 
 //Store
@@ -121,27 +123,37 @@ Route::prefix('admin')->group(function(){
 	Route::get('payment', 'Admin\PaymentController@index')->name('admin.payment.index');
 	Route::get('payment/{payment}/detail', 'Admin\PaymentController@detail')->name('admin.payment.detail');
 	Route::patch('payment/{payment}/done', 'Admin\PaymentController@done')->name('admin.payment.done');
+	Route::get('payment/print', 'Admin\PaymentController@print')->name('admin.payment.print');
 
 	//Admin Payment
 	Route::get('admin-payment', 'Admin\AdminPaymentController@index')->name('admin.adminPayment.index');
 	Route::get('admin-payment/create/{code}', 'Admin\AdminPaymentController@create')->name('admin.adminPayment.create');
 	Route::post('admin-payment', 'Admin\AdminPaymentController@store')->name('admin.adminPayment.store');
+	Route::get('admin-payment/print', 'Admin\AdminPaymentController@print')->name('admin.adminPayment.print');
 	Route::get('admin-payment/{code}', 'Admin\AdminPaymentController@show')->name('admin.adminPayment.show');
 
 	//refund
 	Route::get('refund', 'Admin\RefundController@index')->name('admin.refund.index');
 	Route::get('refund/create/{code}', 'Admin\RefundController@create')->name('admin.refund.create');
 	Route::post('refund', 'Admin\RefundController@store')->name('admin.refund.store');
+	Route::get('refund/print', 'Admin\RefundController@print')->name('admin.refund.print');
 	Route::get('refund/{code}', 'Admin\RefundController@show')->name('admin.refund.show');
 
 	//store
 	Route::get('store', 'Admin\StoreController@index')->name('admin.store.index');
+	Route::get('store/print', 'Admin\StoreController@print')->name('admin.store.print');
 	Route::get('store/{store}', 'Admin\StoreController@show')->name('admin.store.show');
 	Route::patch('store/{store}/activate', 'Admin\StoreController@activate')->name('admin.store.activate');
 	Route::patch('store/{store}/nonactivate', 'Admin\StoreController@nonActivate')->name('admin.store.nonactivate');
 
+	//order
+	Route::get('order', 'Admin\OrderController@index')->name('admin.order.index');
+	Route::get('order/print', 'Admin\OrderController@print')->name('admin.order.print');
+	Route::get('order/{order}/detail', 'Admin\OrderController@detail')->name('admin.order.detail');
+
 	//user
 	Route::get('user', 'Admin\UserController@index')->name('admin.user.index');
+	Route::get('user/print', 'Admin\UserController@print')->name('admin.user.print');
 	Route::get('user/{user}/profile', 'Admin\UserController@profile')->name('admin.user.profile');
 	Route::delete('user/{user}', 'Admin\UserController@destroy')->name('admin.user.destroy');
 

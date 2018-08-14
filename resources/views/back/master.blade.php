@@ -166,7 +166,16 @@
                             </li>
                         </ul>
                     </li>
-                    
+
+                    {{--pesanan--}}
+                    <li class="{{ request()->segment(1) == 'admin'
+                    && request()->segment(2) == 'order' ? 'active' : '' }}">
+                        <a href="{{ url('admin/order') }}">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span>Pesanan</span>
+                        </a>
+                    </li>
+
                     {{--toko--}}
                     <li class="{{ request()->segment(1) == 'admin'
                     && request()->segment(2) == 'store' ? 'active' : '' }}">

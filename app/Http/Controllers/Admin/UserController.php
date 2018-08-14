@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
+    	$this->middleware(['auth', 'admin.only']);
     }
 
     public function index()
@@ -32,5 +32,11 @@ class UserController extends Controller
     {
     	$user->delete();
     	return redirect()->route('admin.user.index')->with('success', 'Berhasil hapus pengguna');
+    }
+
+    public function print()
+    {
+        $users = User::where('role_id', 3)->get();
+        return view('print.user', compact('users'));
     }
 }

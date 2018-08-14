@@ -8,17 +8,27 @@
 	<div class="col-sm-12">
 		<div class="box box-solid">
 			<div class="box-header with-border">
-				<form method="get" action="{{ url('admin/store') }}">
-					<div class="input-group input-group">
-		                <input type="text" class="form-control" name="store_name" value="{{ request('store_name') }}" 
-		                placeholder="Cari nama toko" required autocomplete="off">
-	                    <span class="input-group-btn">
-	                      <button type="submit" class="btn btn-info btn-flat">
-	                      	<i class="fa fa-search"></i>
-	                      </button>
-	                    </span>
-		             </div>
-				</form>
+				<div class="row">
+					<div class="col-sm-6">
+						<a href="{{ url('admin/store/print') }}" target="_blank" class="btn bg-navy">
+							<i class="fa fa-print"></i>
+							Cetak
+						</a>
+					</div>
+					<div class="col-s-6">
+						<form method="get" action="{{ url('admin/store') }}">
+							<div class="input-group input-group">
+				                <input type="text" class="form-control" name="store_name" value="{{ request('store_name') }}" 
+				                placeholder="Cari nama toko" required autocomplete="off">
+			                    <span class="input-group-btn">
+			                      <button type="submit" class="btn btn-info btn-flat">
+			                      	<i class="fa fa-search"></i>
+			                      </button>
+			                    </span>
+				             </div>
+						</form>	
+					</div>
+				</div>
 			</div>
 			<div class="box-body">
 				<div class="table-responsive">

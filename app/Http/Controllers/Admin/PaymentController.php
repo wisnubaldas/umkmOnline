@@ -7,13 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Jobs\RejectPendingOrder;
 use App\Notifications\PaymentConfirmed;
 use App\Notifications\NewPendingOrderForSeller;
+use Carbon\Carbon;
 use App\Payment;
 
 class PaymentController extends Controller
 {
     public function __construct()
     {
-    	$this->middleware('auth');
+    	$this->middleware(['auth', 'admin.only']);
     }
 
    	public function index()
@@ -54,5 +55,13 @@ class PaymentController extends Controller
 
         return redirect()->route('admin.payment.index')
         ->with('success', 'Pembayaran '.$payment->getCode().' telah dibayar');
+    }
+
+    public function print()
+    {
+        $dari = Carbon::createFromFormat('d/m/Y', request('dari'))->toDateString();
+        $sampai = Carbon::createFromFormat('d/m/Y', request('sampai'))->toDateString();
+        $payments = Payment::where('is_paid', 1)->whereBetween('created_at', [$dari, $sampai])->get();
+        return view('print.payment', compact('payments'));
     }
 }

@@ -14,6 +14,11 @@ class Order extends Model
         return strtoupper($this->code);
     }
 
+    public function invoiceCode()
+    {
+        return '#' . strtoupper(str_replace('ord', 'inv', $this->code));
+    }
+
     public function tanggal()
     {
         return Carbon::parse($this->created_at)->format('d/m/Y');

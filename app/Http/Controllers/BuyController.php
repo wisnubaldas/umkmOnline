@@ -55,4 +55,9 @@ class BuyController extends Controller
         
     	return redirect()->route('buy.index');
     }
+
+    public function print(Order $order)
+    {
+        return view('print.invoice', compact('order'));
+    }
 }
